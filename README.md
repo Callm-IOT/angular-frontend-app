@@ -1,2 +1,2 @@
 # angular-frontend-app
-Este repositorio se creo para la elaboración de la aplicación para angular del proyecto de CallM.
+This is for the frontend development of the CalM app desktop site
