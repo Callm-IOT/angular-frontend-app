@@ -1,0 +1,7 @@
+.principal-container{
+    background-color: #345830;
+    height: 97.7vh;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+}
