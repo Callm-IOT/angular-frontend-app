@@ -1,20 +1,27 @@
 <form method="post" action="/">
-    <div class="Name">
-        <label for="username">Nombre de usuario</label>
-        <input type="text" input="user" name="user" required>
+    <div class="input-group">
+        <label for="username">Userame: </label>
+        <input type="text" id="username" name="user" required>
     </div>
-    <div class="password">
-        <label for="password">Contraseña</label>
-        <input type="password" input="password" name="password" required>
+
+    <div class="input-group">
+        <label for="password">Password: </label>
+        <input type="password" id="password" name="password" required>
     </div>
+
     <div class="links">
         <div class="check">
-            <label for="rememberPassword">Remember me</label>
-            <input type="checkbox" name="rememberPass" id="rememberPassword">
+            <label for="rememberPassword" class="custom-checkbox">
+                <input type="checkbox" id="rememberPassword">
+                <span class="checkmark"></span>
+                Remember me
+            </label>
         </div>
+        
         <div class="forgotPass">
-            <a href="http://">Forgot password?</a>
+            <a href="#">Forgot password?</a>
         </div>
     </div>
-    <button type="submit">Inicia Sesión</button>
+
+    <button class="shiny-button" type="submit">Log In</button>
 </form>

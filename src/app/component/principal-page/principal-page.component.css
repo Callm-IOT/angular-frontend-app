@@ -1,7 +1,12 @@
-.principal-container{
-    background-color: #345830;
-    height: 97.7vh;
+.principal-container {
+    background-color: #345830cc; 
+    height: 97.6vh;
     display: flex;
     position: relative;
     flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    box-sizing: border-box;
+    flex: 1;
+    overflow: hidden;
 }
