@@ -1,15 +1,19 @@
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 form {
-    width: 250px;
+    max-width: 300px;
+    width: 100%;
     margin: 200px auto;
     padding: 20px;
     background: #f3f3f3;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 
 div {
     margin-bottom: 15px;
@@ -23,7 +27,7 @@ label {
 
 input {
     width: 100%;
-    padding: 5px;
+    padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
@@ -31,8 +35,10 @@ input {
     transition: border-color 0.3s;
 }
 
+
 input:focus {
     border-color: #607466;
+    box-shadow: 0 0 5px rgba(96, 116, 102, 0.5);
 }
 
 button {
@@ -49,4 +55,31 @@ button {
 
 button:hover {
     background: #495e51;
+    transform: scale(1.02);
 }
+p {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
+a {
+    color: #607466;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+
