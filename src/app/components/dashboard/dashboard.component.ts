@@ -9,5 +9,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
-
+  isSidebarVisible = true; 
+  onToggleSidebar(): void {
+    this.isSidebarVisible = !this.isSidebarVisible; // Alterna la visibilidad.
+  }
 }

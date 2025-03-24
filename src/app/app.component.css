@@ -18,6 +18,10 @@ body {
   z-index: -1;
 }
 
+.hidden{
+  display: none;
+}
+
 /* KEYFRAMES */
 
 @-webkit-keyframes animateBubble {

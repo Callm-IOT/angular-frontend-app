@@ -14,15 +14,22 @@ import { Router, NavigationEnd } from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'CallM-Official Page';
   activeRoute: string = '';
+  showBubbles = true;
+
+
 
   constructor(private router: Router) {}
 
-  ngOnInit() {
+  ngOnInit():void {
     // Escuchar cambios de la ruta
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.activeRoute = event.urlAfterRedirects; // Obtiene la ruta actual
+        this.activeRoute = event.urlAfterRedirects; 
       }
+      if (event instanceof NavigationEnd) {
+        this.showBubbles = !event.url.includes('dashboard'); 
+      }
+      
     });
   }
 

@@ -1,4 +1,8 @@
-.sidebar{
-    height: 500px;
-    background: #d5e2d449;
-}
+.sidebar { 
+    width: 400px;
+    background: #d5e2d456;
+    height: calc(100vh - 10px); 
+    position: fixed; 
+    left: 0;
+    overflow-y: auto
+  }

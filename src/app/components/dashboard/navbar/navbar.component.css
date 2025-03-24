@@ -1,9 +1,10 @@
 nav {
     display: flex;
+    height: 20px;
     justify-content: space-between;
     align-items: center;
     background-color: #d5e2d4;
-    padding: 10px 20px;
+    padding: 20px 20px;
 }
 
 button{
