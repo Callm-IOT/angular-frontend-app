@@ -9,7 +9,7 @@ import { Component,EventEmitter, Output } from '@angular/core';
 export class NavbarComponent {
   @Output() toggleSidebar = new EventEmitter<void>();
 
-  onToggleSidebar(): void {
-    this.toggleSidebar.emit(); 
+  onToggle() {
+    this.toggleSidebar.emit();
   }
 }
