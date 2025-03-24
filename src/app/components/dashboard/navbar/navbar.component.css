@@ -1,0 +1,29 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #d5e2d4;
+    padding: 10px 20px;
+}
+
+button{
+padding: 10px 20px;
+border-radius: 5px;
+border: 0px;
+background:  #18181818;
+}
+button:hover{
+    background:  #f5f2f236;
+}
+
+.menu {
+    flex: 0; 
+    color: #000;
+    text-align: left;
+}
+
+.profile {
+    flex: 0; 
+    color: #000;
+    text-align: right; 
+}
