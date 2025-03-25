@@ -45,4 +45,41 @@ npm run build
 # Ejecutar en modo SSR (Server-Side Rendering)
 npm run serve:ssr:temporal
 ```
+<br><br><br>
+
+## 🚀 **¿Qué es SSR (Server-Side Rendering)?**  
+
+SSR (**Server-Side Rendering**) es una técnica que permite renderizar el HTML de una aplicación en el servidor antes de enviarlo al navegador del usuario.  
+Esto mejora el rendimiento inicial, facilita la indexación por motores de búsqueda (SEO) y optimiza la experiencia en dispositivos de bajos recursos.  
+
+En esta aplicación, se implementa SSR con **Angular Universal** y **Express**, permitiendo que el servidor procese las vistas antes de enviarlas al cliente.
+
+---
+
+## 🚀 **Ejecución con SSR (Server-Side Rendering)**  
+
+Esta aplicación utiliza **Angular Universal** para mejorar el rendimiento, la carga inicial y la optimización para SEO.  
+
+### **📌 Cómo ejecutar en modo SSR**  
+
+```bash
+# Compilar la aplicación con SSR
+npm run build:ssr
+
+# Iniciar el servidor con SSR (temporalmente)
+npm run serve:ssr:temporal
+```
+
+## 📌 Configuración del servidor Express  
+
+El servidor Express (`server.ts`) maneja el SSR con las siguientes características:  
+
+- 📂 **Sirve archivos estáticos** desde `dist/browser` con caché de **1 año**.  
+- 🔄 **Renderiza las solicitudes con Angular Universal** (`AngularNodeAppEngine`).  
+- 🚀 **Corre en el puerto `4000` por defecto** (configurable con `PORT`).  
+
+## 📌 Enrutamiento y prerenderizado  
+
+- 📌 **Todas las rutas se prerenderizan** con `RenderMode.Prerender`.  
+- 📌 **Las solicitudes se manejan en el backend** con `angularApp.handle(req)`.  
 
