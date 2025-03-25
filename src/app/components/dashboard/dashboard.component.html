@@ -6,7 +6,7 @@
     <title>Document</title>
   </head>
   <body>
-    <app-navbar (toggleSidebar)="handleToggleSidebar()"></app-navbar>
-    <app-sidebar  *ngIf="isSidebarVisible"></app-sidebar>
+    <app-navbar (toggleSidebar)="handleToggleSidebar()" ></app-navbar>
+    <app-sidebar  *ngIf="isSidebarVisible" [class.hidden]="!isSidebarVisible"></app-sidebar>
   </body>
 </html>

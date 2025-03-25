@@ -1,20 +1,10 @@
 nav {
     display: flex;
-    height: 20px;
+    height: 40px;
     justify-content: space-between;
     align-items: center;
-    background-color: #d5e2d4;
+    background-color: #d5e2d449;
     padding: 20px 20px;
-}
-
-button{
-padding: 10px 20px;
-border-radius: 5px;
-border: 0px;
-background:  #18181818;
-}
-button:hover{
-    background:  #f5f2f236;
 }
 
 .menu {
@@ -27,4 +17,24 @@ button:hover{
     flex: 0; 
     color: #000;
     text-align: right; 
+}
+
+.itemProfile{
+    border-radius: 100%;
+    background-image:url(https://static.vecteezy.com/system/resources/thumbnails/026/630/551/small/profile-icon-symbol-design-illustration-vector.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    padding: 20px;
+    border: 0px;
+}
+
+.itemMenu{
+    border-radius: 10px;
+    background-image: url(https://static.vecteezy.com/system/resources/previews/002/292/406/non_2x/hamburger-menu-line-icon-free-vector.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    padding: 20px;
+    border: 0px;
 }

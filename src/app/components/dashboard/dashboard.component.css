@@ -20,4 +20,6 @@ body {
 
 .hidden{
   display: none;
+  transform: translateX(-100%);
+  opacity: 0; 
 }

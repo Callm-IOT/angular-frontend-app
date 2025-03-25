@@ -13,6 +13,10 @@ import { CommonModule } from '@angular/common';
 export class RegisterComponent {
 email:string='';
 username:string='';
+name:string='';
+lastname:string='';
+dateOfBirth:string='';
+cellphone:string='';
 password:string='';
 confirmPassword:string='';
 
