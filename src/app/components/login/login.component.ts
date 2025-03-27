@@ -1,22 +1,27 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule, Router} from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import{AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule,RouterModule, CommonModule],
+  imports: [FormsModule, RouterModule, CommonModule],
   standalone: true,
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
 })
 export class LoginComponent {
-email:string='';
-password:string='';
+  email: string = '';
+  password: string = '';
 
-constructor(private router: Router) {}
-login() {
-  console.log('Intentando iniciar sesión con:', this.email, this.password);
-  this.router.navigate(['/dashboard']); 
-}
+  constructor(private router: Router,private authService:AuthService) {}
+  login() {
+    if (this.email && this.password) {
+      console.log('Login successful');
+      localStorage.setItem('username', this.email);
+      this.authService.setUsername(this.email); 
+      this.router.navigate(['/dashboard']);
+    }
+  }
 }

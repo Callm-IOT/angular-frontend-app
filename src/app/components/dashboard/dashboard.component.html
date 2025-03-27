@@ -1,1 +1,13 @@
-<p>dashboard works!</p>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <app-navbar (toggleSidebar)="handleToggleSidebar()" ></app-navbar>
+    <app-main [class.display]="isSidebarVisible"></app-main>
+    <app-sidebar  *ngIf="isSidebarVisible" [class.hidden]="!isSidebarVisible"></app-sidebar>
+  </body>
+</html>

@@ -64,10 +64,13 @@ p {
 }
 
 a {
-  animation: changeColorL 5s ease-in-out infinite;
-  text-decoration: none;
   font-weight: bold;
+  margin-left: 5px;
+  text-decoration: none;
+  animation: mixColor 5s ease-in-out infinite;
 }
+
+
 
 a:hover {
   text-decoration: underline;
@@ -77,6 +80,33 @@ a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.lav{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 0px;
+}
+
+.lav a{
+  margin-top: 2px;
+  margin-left: 84px;
+  color: #8a80f97c;
+  position: relative;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-image: linear-gradient(to left, #8a80f97c 30%, #d5e2d4 40%, #8a80f97c 70%);
+  color: transparent;
+  background-size: 200% auto;
+  animation: shine 3s infinite ;
+}
+
+.forgot-password {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 5px; 
+  text-align: right; 
+  font-size: 0.9em;
 }
 
 /*Animaciones*/
@@ -97,13 +127,22 @@ a:hover {
       border-color: #8a80f97c;
     }
   }
-  
-  @keyframes changeColorL {
-      0%,100% {
-        color: #8a80f97c;
-      }
-      50% {
-        color: #bcc0bc;
-      }
-  
+
+  @keyframes shine {
+    0% {
+      background-position: 100% center;
     }
+    100% {
+      background-position: -100% center;
+    }
+  }
+
+  @keyframes mixColor {
+    0%,100% {
+      color: #8a80f97c;
+    }
+    50% {
+      color: #bcc0bc;
+    }
+
+  }

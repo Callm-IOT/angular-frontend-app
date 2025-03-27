@@ -1,0 +1,72 @@
+nav {
+    display: flex;
+    height: 25px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #d5e2d449;
+    padding: 20px 10px;
+}
+
+.menu {
+    flex: 0; 
+    color: #000;
+    text-align: left;
+}
+
+.itemProfile:hover .menu-content {
+    display: block;
+}
+
+
+.menu-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 90px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    right: 0;
+}
+
+.menu-content a{
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    right: 0;
+    
+}
+
+.menu-content a:hover {
+    background-color: #f1f1f1;
+}
+
+
+.profile {
+    flex: 0; 
+    color: #000;
+    text-align: right; 
+}
+
+.itemProfile{
+    border-radius: 100%;
+    background-image:url(https://static.vecteezy.com/system/resources/thumbnails/026/630/551/small/profile-icon-symbol-design-illustration-vector.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    padding: 15px;
+    border: 0px;
+    position: relative;
+    display: inline-block;
+    border: solid 1px #0000001a;
+}
+
+.itemMenu{
+    border-radius: 10px;
+    background-image: url(https://static.vecteezy.com/system/resources/previews/002/292/406/non_2x/hamburger-menu-line-icon-free-vector.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    padding: 20px;
+    border: 0px;
+}
