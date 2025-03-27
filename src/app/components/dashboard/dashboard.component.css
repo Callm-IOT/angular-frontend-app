@@ -22,4 +22,13 @@ body {
   display: none;
   transform: translateX(-100%);
   opacity: 0; 
+  transition: width 0.3s ease;
+}
+
+.display {
+  display: flex;
+  opacity: 1;
+  margin-left: 25vw;
+  width: 75vw;
+  transition: width 0.3s ease; 
 }

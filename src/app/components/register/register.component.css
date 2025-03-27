@@ -92,6 +92,7 @@ a:hover {
       transform: translateY(-2px); 
     }
   }
+  
   @keyframes changeColor {
     0%,100% {
       border-color: #d5e2d4;

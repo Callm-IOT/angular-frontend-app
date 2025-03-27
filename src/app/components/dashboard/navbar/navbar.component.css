@@ -17,32 +17,28 @@ nav {
     display: block;
 }
 
-.itemProfile:hover .menu-button {
-    background-color: #3e8e41;
-}
-
 
 .menu-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 150px;
+    min-width: 90px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
+    right: 0;
 }
 
-.menu-content a {
+.menu-content a{
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-    left: 0;
-
+    right: 0;
+    
 }
 
 .menu-content a:hover {
     background-color: #f1f1f1;
-    left: 0;
 }
 
 
@@ -62,6 +58,7 @@ nav {
     border: 0px;
     position: relative;
     display: inline-block;
+    border: solid 1px #0000001a;
 }
 
 .itemMenu{

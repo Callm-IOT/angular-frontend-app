@@ -1,14 +1,18 @@
 <nav>
     <div class="menu">
-        <button class="itemMenu" (click)="onToggle()"> </button>
+      <button class="itemMenu" (click)="onToggle()"></button>
     </div>
     <div class="profile">
-        <button class="itemProfile">
-            <div class="menu-content">
-                <button onclick="alert('Opción 1 seleccionada')">Opción 1</button>
-                <button onclick="alert('Opción 2 seleccionada')">Opción 2</button>
-    
-            </div>
-        </button>
+      <button class="itemProfile">
+        <div class="menu-content">
+          <a (click)="openModal()">Perfil</a>
+          <app-profile
+            [isVisible]="isModalVisible"
+            (close)="closeModal()"
+          ></app-profile>
+          <a routerLink="/login">Cerrar Sesión</a>
+        </div>
+      </button>
+      <router-outlet></router-outlet>
     </div>
-</nav>
+  </nav>

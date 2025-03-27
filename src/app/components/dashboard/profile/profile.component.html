@@ -1,0 +1,61 @@
+<div class="modal" *ngIf="isVisible">
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <button class="itemProfile"></button>
+    <label></label>
+    <div class="container">
+      <input
+        class="editable"
+        [disabled]="!isEditable"
+        type="text"
+        name="username"
+        placeholder="Nombre de Usuario: "
+      />
+      <input
+        class="editable"
+        [disabled]="!isEditable"
+        type="text"
+        name="name"
+        placeholder="Nombre(s): "
+      />
+    </div>
+    <div class="container">
+      <input
+        class="editable"
+        [disabled]="!isEditable"
+        type="text"
+        name="lastname"
+        placeholder="Apellido(s): "
+      />
+      <input
+        class="editable"
+        [disabled]="!isEditable"
+        type="date"
+        name="dob"
+        placeholder="Fecha de Nacimiento: "
+      />
+    </div>
+    <div class="container">
+      <input
+        class="editable"
+        [disabled]="!isEditable"
+        type="email"
+        name="email"
+        placeholder="Email: "
+      />
+      <input
+        class="editable"
+        [disabled]="!isEditable"
+        type="tel"
+        name="cellphone"
+        placeholder="Teléfono: "
+      />
+    </div>
+    <div class="btnContainer">
+      <button class="btn" (click)="isEdit()">Editar</button>
+      <button class="btn" (click)="isEdit()" (click)="closeModal()">
+        Guardar
+      </button>
+    </div>
+  </div>
+</div>
