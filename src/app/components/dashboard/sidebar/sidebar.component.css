@@ -1,8 +1,0 @@
-.sidebar { 
-    width:25vw;
-    background: #d5e2d456;
-    height: calc(100vh - 10px); 
-    position: fixed; 
-    left: 0;
-    overflow-y: auto;
-  }

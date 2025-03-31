@@ -8,6 +8,6 @@
   <body>
     <app-navbar (toggleSidebar)="handleToggleSidebar()" ></app-navbar>
     <app-main [class.display]="isSidebarVisible"></app-main>
-    <app-sidebar  *ngIf="isSidebarVisible" [class.hidden]="!isSidebarVisible"></app-sidebar>
+    <!-- <app-sidebar  [hidden]="!isSidebarVisible"  class="fixed top-0 left-0 w-64 h-full bg-gray-800 shadow-lg transition-transform duration-300" [class.hidden]="!isSidebarVisible"></app-sidebar> -->
   </body>
 </html>

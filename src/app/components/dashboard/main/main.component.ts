@@ -5,14 +5,14 @@ import { AuthService } from '../../../services/auth.service';
   selector: 'app-main',
   imports: [],
   templateUrl: './main.component.html',
-  styleUrl: './main.component.css'
+  styleUrl: './main.component.css',
 })
 export class MainComponent {
   username: string;
-  constructor() {
-    this.username = localStorage.getItem('username') || 'Usuario';
-  }
-  // constructor(private authService: AuthService) {
-  //   this.username = this.authService.getUsername();
+  // constructor() {
+  //   this.username = localStorage.getItem('username') || 'Usuario';
   // }
+  constructor(private authService: AuthService) {
+    this.username = this.authService.getUsername();
+  }
 }

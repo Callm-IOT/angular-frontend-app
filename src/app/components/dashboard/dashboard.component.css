@@ -9,15 +9,6 @@ body {
   font: 100% Lato, Arial, Sans Serif;
 }
 
-#background-wrap {
-  bottom: 0;
-  left: 0;
-  position: fixed;
-  right: 0;
-  top: 0;
-  z-index: -1;
-}
-
 .hidden{
   display: none;
   transform: translateX(-100%);

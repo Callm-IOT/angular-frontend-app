@@ -5,7 +5,7 @@
 }
 
 form {
-  max-width: 300px;
+  max-width: 350px;
   width: 100%;
   margin: 200px auto;
   padding: 20px;
@@ -22,6 +22,7 @@ label {
   font-weight: bold;
   display: block;
   margin-bottom: 5px;
+  font-size: smaller;
 }
 
 input {
@@ -90,8 +91,9 @@ a:hover {
 
 .lav a{
   margin-top: 2px;
-  margin-left: 84px;
-  color: #8a80f97c;
+  font-size: smaller;
+  margin-left: 160px;
+  color: #8a80f9a1;
   position: relative;
   -webkit-background-clip: text;
   background-clip: text;
