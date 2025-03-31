@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <app-navbar (toggleSidebar)="handleToggleSidebar()" ></app-navbar>
-    <app-main [class.display]="isSidebarVisible"></app-main>
-    <!-- <app-sidebar  [hidden]="!isSidebarVisible"  class="fixed top-0 left-0 w-64 h-full bg-gray-800 shadow-lg transition-transform duration-300" [class.hidden]="!isSidebarVisible"></app-sidebar> -->
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <app-navbar (toggleSidebar)="handleToggleSidebar()"></app-navbar>
+  <app-sidebar [isVisible]="isSidebarVisible"></app-sidebar>
+  <app-main></app-main>
+  
+  <!-- Overlay opcional -->
+  <div class="overlay" *ngIf="isSidebarVisible" (click)="handleToggleSidebar()"></div>
+</body>
+
 </html>

@@ -1,0 +1,74 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -30vw;
+    /* Oculta el sidebar por defecto */
+    width: 25vw;
+    height: 100vh;
+    background: whitesmoke;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: left 0.3s ease;
+    z-index: 1000;
+    /*items alineados abajo*/
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0px 10px;
+}
+
+.sidebar.visible {
+    left: 0;
+}
+
+.routes-container {
+    width: 100%;
+}
+
+.routes {
+    max-width: 95%;
+    border-radius: 5px;
+    padding: 10px;
+    background: #ff0000;
+    margin-bottom: 5px;
+
+}
+
+:host([isVisible="true"]) {
+    transform: translateX(0);
+}
+
+/*respo*/
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: 16%;
+        transform: translateY(-105%);
+        padding: 0px 10px;
+    }
+
+
+    .sidebar.visible {
+        transform: translateY(0%);
+    }
+
+    .routes {
+        width: 90%; /* Los items ocupan todo el ancho */
+        text-align: center;
+    }
+}
+
+/* Opcional: Overlay para fondo oscuro al abrir el menú */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+}
+
+.overlay.visible {
+    display: block;
+}
