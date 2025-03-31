@@ -10,10 +10,7 @@
     transition: left 0.3s ease;
     z-index: 1000;
     /*items alineados abajo*/
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 0px 10px;
+
 }
 
 .sidebar.visible {
@@ -22,6 +19,10 @@
 
 .routes-container {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0px 10px 5px;
 }
 
 .routes {
