@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
+import { Graph1Component } from '../graphs/graph1/graph1.component';
 
 @Component({
   selector: 'app-main',
-  imports: [],
+  imports: [Graph1Component],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css',
 })

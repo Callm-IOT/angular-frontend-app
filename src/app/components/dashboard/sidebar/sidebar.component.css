@@ -19,6 +19,8 @@
 
 .routes-container {
     width: 100%;
+    bottom: 0;
+    position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;

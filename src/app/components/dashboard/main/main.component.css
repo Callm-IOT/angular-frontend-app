@@ -5,8 +5,11 @@
   overflow: hidden;
   overflow-x: hidden;
   margin: 0;
-  padding: 0;
+  padding:5px;
   font: 100% Lato, Arial, Sans Serif;
+  display: flex;
+  flex-direction: column; /* Organiza los elementos en columna */
+  gap: 10px;
 }
 
 #background-wrap {
@@ -17,9 +20,38 @@
   top: 0;
   z-index: -1;
 }
-h1{
-  font-size: 2.5em;
-  color: #fff;
-  text-align: center;
-  margin-top: 20px;
+
+.top {
+  display: flex;
+  gap: 10px; 
+}
+
+.div1 {
+  flex: 2; 
+  background-color: #f8b400; 
+  padding: 20px; 
+  height: 60vh;
+  border-radius: 10px;
+}
+
+.div2 {
+  flex: 1; 
+  background-color: #f85f73; 
+  padding: 20px;
+  border-radius: 10px; 
+}
+
+.bottom {
+  display: flex;
+  gap: 10px; 
+  justify-content: center; 
+}
+
+.bottom div {
+  flex: 1; 
+  height: 40vh;
+  background-color: #6a98f0; 
+  padding: 15px; 
+  text-align: center; 
+  border-radius: 10px;
 }
