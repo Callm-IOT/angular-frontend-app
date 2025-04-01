@@ -32,7 +32,7 @@ export class Graph1Component implements OnInit {
     let circleMask = chartContainer.createChild(am4core.Circle);
 
     let waves = chartContainer.createChild(am4core.WavedRectangle);
-    waves.fill = am4core.color("#34a4eb");
+    waves.fill = am4core.color("#BFD7B5");
     waves.mask = circleMask;
     waves.horizontalCenter = "middle";
     waves.waveHeight = 10;
@@ -62,16 +62,10 @@ export class Graph1Component implements OnInit {
 
     // Añade texto y etiquetas
     let label = chartContainer.createChild(am4core.Label);
-    label.text = `${this.value} Litres`.toUpperCase();
+    label.text = `${this.value} Litros`.toUpperCase();
     label.fill = am4core.color("#fff");
-    label.fontSize = 30;
+    label.fontSize = 20;
     label.horizontalCenter = "middle";
 
-    let capacityLabel = chartContainer.createChild(am4core.Label);
-    capacityLabel.text = `Capacity ${this.capacity} Litres`.toUpperCase();
-    capacityLabel.fill = am4core.color("#34a4eb");
-    capacityLabel.fontSize = 20;
-    capacityLabel.textAlign = "middle";
-    capacityLabel.padding(0, 0, 0, 0);
   }
 }
