@@ -69,11 +69,13 @@
     flex-direction: column;
     height: auto;
   }
-  
-  .div1, .div2 {
+
+  .div1,
+  .div2 {
     max-width: 100%;
     flex: none;
     height: 25vh;
+    align-items: center;
   }
 
   .bottom {
