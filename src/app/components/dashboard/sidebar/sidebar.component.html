@@ -1,7 +1,16 @@
 <div class="sidebar" [class.visible]="isVisible">
-    <div class="routes-container">
-        <button class="routes">Inicio</button>
-        <button class="routes">Historial</button>
-        <button class="routes">Acerca de</button>
+  <div class="routes-container">
+    <div class="routes">
+      <button class="item home"></button>
+      <a routerLink="/main" >Inicio</a>
     </div>
+    <div class="routes">
+      <button class="item history"></button>
+      <a>Historial</a>
+    </div>
+    <div class="routes">
+      <button class="item about"></button>
+      <a>Acerca de</a>
+    </div>
+  </div>
 </div>

@@ -8,14 +8,14 @@
         class="editable"
         [disabled]="!isEditable"
         type="text"
-        name="username"
+        [(ngModel)]="user.username"
         placeholder="Nombre de Usuario: "
       />
       <input
         class="editable"
         [disabled]="!isEditable"
         type="text"
-        name="name"
+        [(ngModel)]="user.name"
         placeholder="Nombre(s): "
       />
     </div>
@@ -24,14 +24,14 @@
         class="editable"
         [disabled]="!isEditable"
         type="text"
-        name="lastname"
+        [(ngModel)]="user.lastname"
         placeholder="Apellido(s): "
       />
       <input
         class="editable"
         [disabled]="!isEditable"
         type="date"
-        name="dob"
+        [(ngModel)]="user.dob"
         placeholder="Fecha de Nacimiento: "
       />
     </div>
@@ -40,20 +40,20 @@
         class="editable"
         [disabled]="!isEditable"
         type="email"
-        name="email"
+        [(ngModel)]="user.email"
         placeholder="Email: "
       />
       <input
         class="editable"
         [disabled]="!isEditable"
         type="tel"
-        name="cellphone"
+        [(ngModel)]="user.cellphone"
         placeholder="Teléfono: "
       />
     </div>
     <div class="btnContainer">
       <button class="btn" (click)="isEdit()">Editar</button>
-      <button class="btn" (click)="isEdit()" (click)="closeModal()">
+      <button class="btn" (click)="isEdit()" (click)="saveChanges()"  (click)="closeModal()">
         Guardar
       </button>
     </div>

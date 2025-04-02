@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
@@ -6,66 +6,54 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 @Component({
   selector: 'app-graph1',
   templateUrl: './graph1.component.html',
-  styleUrl: './graph1.component.css'
+  styleUrls: ['./graph1.component.css'],
 })
-export class Graph1Component implements OnInit {
-  private capacity = 6000;
-  private value = 4000;
-  private circleSize = 0.8;
+export class Graph1Component implements OnInit, OnDestroy {
+  private chart!: am4charts.PieChart;
 
   ngOnInit(): void {
-    // Configuración de temas
+    // Aplicar el tema
     am4core.useTheme(am4themes_animated);
 
-    // Creación del componente
-    let component = am4core.create("chartdiv", am4core.Container);
-    component.width = am4core.percent(100);
-    component.height = am4core.percent(100);
+    // Crear el gráfico
+    this.chart = am4core.create("chartdiv", am4charts.PieChart);
+    this.chart.hiddenState.properties.opacity = 0; // Efecto de entrada
 
-    let chartContainer = component.createChild(am4core.Container);
-    chartContainer.x = am4core.percent(50);
-    chartContainer.y = am4core.percent(50);
+    // Datos del gráfico
+    this.chart.data = [
+      { country: "Lithuania", value: 401 },
+      { country: "Czech Republic", value: 300 },
+      { country: "Ireland", value: 200 },
+      { country: "México", value: 189 },
+      { country: "Germany", value: 165 },
+      { country: "Australia", value: 139 },
+      { country: "Austria", value: 128 }
+    ];
 
-    let circle = chartContainer.createChild(am4core.Circle);
-    circle.fill = am4core.color("#dadada");
+    // Configuración del gráfico
+    this.chart.radius = am4core.percent(70);
+    this.chart.innerRadius = am4core.percent(40);
+    this.chart.startAngle = 180;
+    this.chart.endAngle = 360;
 
-    let circleMask = chartContainer.createChild(am4core.Circle);
+    // Crear la serie
+    let series = this.chart.series.push(new am4charts.PieSeries());
+    series.dataFields.value = "value";
+    series.slices.template.cornerRadius = 10;
+    series.slices.template.innerCornerRadius = 7;
+    series.slices.template.draggable = true;
+    series.slices.template.inert = true;
+    series.alignLabels = false;
 
-    let waves = chartContainer.createChild(am4core.WavedRectangle);
-    waves.fill = am4core.color("#BFD7B5");
-    waves.mask = circleMask;
-    waves.horizontalCenter = "middle";
-    waves.waveHeight = 10;
-    waves.waveLength = 30;
-    waves.y = 500;
-    circleMask.y = -500;
+    // Animación de entrada
+    series.hiddenState.properties.startAngle = 90;
+    series.hiddenState.properties.endAngle = 90;
 
-    component.events.on("maxsizechanged", () => {
-      let smallerSize = Math.min(component.pixelWidth, component.pixelHeight);  
-      let radius = smallerSize * this.circleSize / 2;
+  }
 
-      circle.radius = radius;
-      circleMask.radius = radius;
-      waves.height = smallerSize;
-      waves.width = Math.max(component.pixelWidth, component.pixelHeight);
-
-      let labelRadius = radius + 20;
-
-      setValue(this.value);
-    });
-
-    const setValue = (value: number) => {
-      let y = -circle.radius - waves.waveHeight + (1 - value / this.capacity) * circle.pixelRadius * 2;
-      waves.animate([{property:"y", to:y}, {property:"waveHeight", to:10, from:15}, {property:"x", from:-50, to:0}], 5000, am4core.ease.elasticOut);
-      circleMask.animate([{property:"y", to:-y},{property:"x", from:50, to:0}], 5000, am4core.ease.elasticOut);
-    };
-
-    // Añade texto y etiquetas
-    let label = chartContainer.createChild(am4core.Label);
-    label.text = `${this.value} Litros`.toUpperCase();
-    label.fill = am4core.color("#fff");
-    label.fontSize = 20;
-    label.horizontalCenter = "middle";
-
+  ngOnDestroy(): void {
+    if (this.chart) {
+      this.chart.dispose();
+    }
   }
 }

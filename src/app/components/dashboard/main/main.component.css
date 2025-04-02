@@ -24,8 +24,8 @@
 
 .div1 {
   flex: 2;
-  background-color: #f8b400;
-  padding: 20px;
+  background-color: #fafafa80;
+  padding: 0px 50px;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -35,7 +35,7 @@
 
 .div2 {
   flex: 1;
-  background-color: #f85f73;
+  background-color: #fafafa80;
   padding: 20px;
   border-radius: 10px;
   display: flex;

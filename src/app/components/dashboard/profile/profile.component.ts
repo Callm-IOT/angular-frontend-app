@@ -1,25 +1,67 @@
-import { Component,Input,Output,EventEmitter} from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../services/auth.service';
+import { User } from '../../../models/user';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css'
+  styleUrl: './profile.component.css',
 })
-export class ProfileComponent {
-  @Input() isVisible = false; 
+export class ProfileComponent implements OnInit {
+  @Input() isVisible = false;
+
+  user: User = {
+    id: '',
+    username: '',
+    name: '',
+    lastname: '',
+    dob: '',
+    email: '',
+    cellphone: '',
+  };
+
+  constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnInit() {
+    const userId = localStorage.getItem('userId'); // Asegúrate de guardar el ID en localStorage
+    if (userId) {
+      this.authService.getUser(userId).subscribe({
+        next: (data) => {
+          this.user = data;
+        },
+        error: (err) => console.error('Error al cargar el usuario:', err),
+      });
+    }
+  }
+
+  saveChanges() {
+    const userId = this.user.id;
+    if (userId) {
+      this.authService.updateUser(userId, this.user).subscribe({
+        next: (updatedUser) => {
+          console.log('Usuario actualizado:', updatedUser);
+          this.router.navigate(['/dashboard']);
+        },
+        error: (err) => {
+          console.error('Error actualizando usuario:', err);
+        },
+      });
+    }
+  }
+
   @Output() close = new EventEmitter<void>(); // Evento para cerrar el modal
-  isEditable=false;
+  isEditable = false;
   closeModal() {
     this.isVisible = false;
     this.close.emit(); // Emitir evento de cierre
-    console.log('modal cerrado: '+this.isVisible);
+    console.log('modal cerrado: ' + this.isVisible);
   }
 
-  isEdit(){
-    this.isEditable=!this.isEditable;
+  isEdit() {
+    this.isEditable = !this.isEditable;
   }
-
-
 }

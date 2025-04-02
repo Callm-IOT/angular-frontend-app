@@ -1,5 +1,9 @@
 <div class="content">
   <form (ngSubmit)="login()">
+    <div class="err" *ngIf="isError">
+      <a style="color: #fff;" class="btn-err" *ngIf="errorMessage" (click)="isError = false">&times;</a>
+      <p *ngIf="errorMessage" class="msg-err">{{ errorMessage }}</p>
+    </div>    
     <div>
       <label for="email">Correo Electrónico</label>
       <input type="email" [(ngModel)]="email" name="email" required />
