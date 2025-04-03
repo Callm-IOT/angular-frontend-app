@@ -18,6 +18,7 @@ export class Graph1Component implements OnInit, OnDestroy {
     // Crear el gráfico
     this.chart = am4core.create("chartdiv", am4charts.PieChart);
     this.chart.hiddenState.properties.opacity = 0; // Efecto de entrada
+    this.chart.logo.disabled = true;
 
     // Datos del gráfico
     this.chart.data = [

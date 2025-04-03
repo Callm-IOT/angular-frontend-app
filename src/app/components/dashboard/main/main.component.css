@@ -13,24 +13,25 @@
   font: 100% Lato, Arial, Sans Serif;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
 }
 
 .top {
   display: flex;
-  gap: 10px;
-  height: 55vh;
+  gap: 5px;
+  height: 80vh;
 }
 
 .div1 {
   flex: 2;
   background-color: #fafafa80;
-  padding: 0px 50px;
+  padding: 0 50px;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 65%;
+  max-width: 70%;
+  max-height: 70vh; 
 }
 
 .div2 {
@@ -42,25 +43,30 @@
   align-items: center;
   justify-content: center;
   max-width: 35%;
+  height: 91vh;
 }
 
 .bottom {
   display: flex;
-  gap: 10px;
-  justify-content: center;
+  gap: 10px; 
+  justify-content: flex-start;
   flex-wrap: wrap;
-  height: 35vh;
+  height: 20vh;
+  margin-top: -90px; 
 }
 
 .bottom div {
-  flex: 1;
-  min-height: 20vh;
-  max-height: 40vh;
-  background-color: #6a98f0;
+  background-color: #fafafa80;
   padding: 15px;
   text-align: center;
+  align-items: center;
   border-radius: 10px;
-  max-width: 40%;
+  width: 22.96%;
+  min-width: 80px;
+}
+
+.div4 h1{
+  font-size:3.5rem;
 }
 
 /* 🔹 RESPONSIVE: Ajustes para pantallas pequeñas */
@@ -84,6 +90,7 @@
 
   .bottom div {
     max-width: 50%;
+    
   }
 }
 
