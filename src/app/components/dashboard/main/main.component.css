@@ -54,8 +54,8 @@
 
 .bottom div {
   flex: 1;
-  min-height: 15vh;
-  max-height: 30vh;
+  min-height: 20vh;
+  max-height: 40vh;
   background-color: #6a98f0;
   padding: 15px;
   text-align: center;
