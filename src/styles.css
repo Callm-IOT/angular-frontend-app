@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+/* Tema claro por defecto */
+body {
+  background-color: white;
+  color: black;
+}
+
+/* Tema oscuro */
+body.dark-theme {
+  background-color: #121212;
+  color: white;
+}
+
+/* Cambios para otros elementos al usar el tema oscuro */
+body.dark-theme .sidebar {
+  background-color: #333;
+  color: #f3f3f3;
+}
+
+body.dark-theme .routes-container .routes {
+  background-color: #444;
+}
+
+body.dark-theme .link-content a {
+  color: white;
+}
+
+body.dark-theme p {
+  color: white;
+}

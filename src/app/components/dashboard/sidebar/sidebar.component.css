@@ -1,119 +1,139 @@
+/* Estilos generales */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
 .sidebar {
   position: fixed;
   top: 0;
-  left: -16vw;
-  /* Oculta el sidebar por defecto */
-  width: 20vw;
-  height:90vh;
-  margin-top: 9vh;
-  background: #d5e2d4;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  transition: left 0.3s ease;
-  z-index: 1000;
-  /*items alineados abajo*/
-  padding: 0px 5px;
-}
-
-.sidebar.visible {
   left: 0;
+  width: 4vw; /* Sidebar cerrado */
+  height: 100vh;
+  background: #f3f3f3;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.199);
+  transition: width 0.3s ease;
+  z-index: 100;
+  padding: 10px 5px;
+  overflow: hidden;
 }
 
-.routes-container {
-  width: 100%;
-  bottom: 0;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 0px 0px 5px;
+/* Sidebar abierto */
+.sidebar.visible {
+  width: 20vw;
 }
 
-.link-content{
-  background: #ffffff00;
-  width: 50%;
-  border-radius: 10px;
-  text-align: start;
-  padding: 10px;
-}
-
-.routes {
-  max-width: 90%;
-  border-radius: 5px;
-  display: flex;
-  padding: 10px;
-  background: #00000000;
-  margin-bottom: 5px;
-  flex-direction: row-reverse;
-}
-
-.routes.visible{
+/* Botón de alternancia */
+.log {
   display: flex;
   flex-direction: row;
+  text-align: center;
+  align-items: center;
+  width: 90%;
+  background: transparent;
+  padding: 0px 8px;
+  max-height: 25px;
+  margin: 5px 0px;
 }
 
-:host([isVisible="true"]) {
-  transform: translateX(0);
+.toggle-text {
+  color: #333;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-left: 15px;
 }
 
-/*respo*/
-@media (max-width: 768px) {
-  .sidebar {
-    width: 100%;
-    height: 16%;
-    transform: translateY(-105%);
-    padding: 0px 10px;
-  }
-
-  .sidebar.visible {
-    transform: translateY(0%);
-  }
-
-  .routes {
-    width: 90%;
-    text-align: center;
-  }
+.close-sidebar{
+  margin-left: auto;
+  cursor: pointer;
+  color: #333;
 }
 
-/* Opcional: Overlay para fondo oscuro al abrir el menú */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
+.icon-closed {
+  background-image: url(../../../assets/icon-callm.png);
+}
+
+.icon-open {
+  display: flex;
+  align-items: center; /* Alinea el texto y el icono verticalmente */
+  background-image: url(../../../assets/icon-callm.png);
+  margin-right: auto;
+}
+
+.sidebar-toggle-btn {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: transparent;
+  padding: 20px;
+  margin: 0px -5px;
+}
+
+/* Contenedor de rutas */
+.routes-container {
   width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 999;
+  height: calc(100vh - 50px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow-y: auto; /* Permite que el contenido se ajuste y no desborde */
+}
+
+/* Estilo base de cada fila */
+.routes {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  transition: background 0.3s;
+  position: relative;
+}
+
+
+/* Flex normal cuando sidebar cerrado */
+.sidebar:not(.visible) .routes {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Flex invertido cuando sidebar abierto */
+.sidebar.visible .routes {
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* Ocultar texto cuando sidebar está cerrado */
+.sidebar:not(.visible) .link-content {
   display: none;
 }
 
-.overlay.visible {
+/* Mostrar texto cuando sidebar está abierto */
+.sidebar.visible .link-content {
   display: block;
+  margin-right: 10px;
+  color: white;
 }
 
+/* Estilo de íconos */
 .item {
-  border-radius: 100%;
-  padding: 20px;
-  border: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-size: cover;
   background-repeat: no-repeat;
-  background-size: contain;
-}
-
-a {
-  margin-top: 10px;
-  font-size: large;
-  position: relative;
+  background-position: center;
+  border: none;
   cursor: pointer;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-image: linear-gradient(to left, #000000a4 30%, #ffffffa4 40%, #000000a4 70%);
-  color: transparent;
-  background-size: 200% auto;
-  animation: shine 3s infinite;
-  margin-left: 20px;
-  align-items: center;
-  text-align: center;
 }
 
+/* Ejemplos de íconos */
 .item.home {
   background-image: url(https://i.pinimg.com/474x/76/a4/d7/76a4d75e8cf5ee7f4276810526115cf7.jpg);
 }
@@ -126,6 +146,14 @@ a {
   background-image: url(https://previews.123rf.com/images/vectorhome/vectorhome2001/vectorhome200100068/152318980-por-qu%C3%A9-nosotros-icono.jpg);
 }
 
+.item.logout{
+  background-image: url(https://static.vecteezy.com/system/resources/previews/019/078/821/non_2x/logout-simple-flat-icon-illustration-vector.jpg);
+}
+
+.item.logout {
+  background-image: url(https://static.vecteezy.com/system/resources/previews/019/078/821/non_2x/logout-simple-flat-icon-illustration-vector.jpg);
+}
+
 @keyframes shine {
   0% {
     background-position: 100% center;
@@ -133,4 +161,128 @@ a {
   100% {
     background-position: -100% center;
   }
+}
+
+a {
+  margin-top: 10px;
+  font-size: large;
+  position: relative;
+  cursor: pointer;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-image: linear-gradient(
+    to left,
+    #000000a4 30%,
+    #ffffffa4 40%,
+    #000000a4 70%
+  );
+  color: transparent;
+  background-size: 200% auto;
+  animation: shine 3s infinite;
+  margin-left: 20px;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Efecto de animación de apertura/cierre del sidebar */
+:host([isVisible="true"]) {
+  transform: translateX(0);
+}
+
+.sidebar.visible .link-content {
+  display: block;
+}
+
+.sidebar:not(.visible) .link-content {
+  display: none;
+
+}
+
+/* Botón de cierre de sesión y tema */
+.buttom-routes {
+  margin-top: auto; 
+  width: 96%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 15px 0;
+  position: absolute; 
+  bottom: 0; 
+}
+
+/* Ícono de tema (siempre visible, sin interacción) */
+.item.theme-icon {
+  width: 30px;
+  height: 30px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-right: 10px;
+  pointer-events: none; /* Desactiva clics */
+}
+
+.item.theme-icon.light {
+  background-image: url("https://img.icons8.com/ios/50/000000/sun--v1.png");
+}
+
+.item.theme-icon.dark {
+  background-image: url("https://img.icons8.com/ios/50/ffffff/moon-symbol.png");
+}
+
+/* Tooltip opcional al pasar sobre el ícono */
+.item.theme-icon[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 100%;
+  margin-left: 10px;
+  padding: 5px;
+  background-color: #333;
+  color: white;
+  font-size: 12px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+/* Switch (solo visible con sidebar abierto) */
+.theme-switch {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  background: #ccc;
+  border-radius: 50px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.theme-switch::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.theme-switch.active {
+  background: #4f4f4f;
+}
+
+.theme-switch.active::before {
+  transform: translateX(18px);
+}
+
+/* Ocultar el switch si sidebar está cerrado */
+.sidebar:not(.visible) .theme-switch {
+  display: none;
+}
+
+/* Ocultar el texto también */
+.sidebar:not(.visible) .link-content {
+  display: none;
 }

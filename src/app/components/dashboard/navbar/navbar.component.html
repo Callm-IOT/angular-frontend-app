@@ -1,18 +1,9 @@
 <nav>
-    <div class="menu">
-      <button class="itemMenu" (click)="onToggle()"></button>
-    </div>
-    <div class="profile">
-      <button class="itemProfile">
-        <div class="menu-content">
-          <a (click)="openModal()">Perfil</a>
-          <app-profile
-            [isVisible]="isModalVisible"
-            (close)="closeModal()"
-          ></app-profile>
-          <a routerLink="/login">Cerrar Sesión</a>
-        </div>
-      </button>
-      <router-outlet></router-outlet>
-    </div>
-  </nav>
+  <div class="profile">
+    <button class="itemProfile" (click)="openModal()"></button>
+  </div>
+  <app-profile
+    [isVisible]="isModalVisible"
+    (close)="closeModal()"
+  ></app-profile>
+</nav>

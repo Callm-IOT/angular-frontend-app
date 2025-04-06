@@ -6,14 +6,18 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [NavbarComponent ,SidebarComponent, CommonModule, MainComponent],
+  imports: [NavbarComponent, SidebarComponent, CommonModule, MainComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent {
   isSidebarVisible = false;
+  isOverlayVisible = false;
+  handleOverlayToggle(visible: boolean) {
+    this.isOverlayVisible = visible; 
+  }
 
-  handleToggleSidebar() {
-    this.isSidebarVisible = !this.isSidebarVisible;
+  handleSidebarVisibilityChange(isVisible: boolean) {
+    this.isSidebarVisible = isVisible;
   }
 }
