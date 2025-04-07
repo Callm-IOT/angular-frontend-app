@@ -6,11 +6,13 @@
       (click)="toggleSidebar()"
     ></button>
     <p *ngIf="isVisible" class="toggle-text">CALLM</p>
-    <span *ngIf="isVisible" (click)="toggleSidebar()" class="close-sidebar"
-      >&#10006;</span
-    >
+    <span *ngIf="isVisible" (click)="toggleSidebar()" class="close-sidebar">
+      &#10006;
+    </span>
   </div>
+
   <br />
+
   <div class="routes-container">
     <div class="routes" data-tooltip="Inicio">
       <button class="item home"></button>
@@ -18,41 +20,49 @@
         <a routerLink="/dashboard">Inicio</a>
       </div>
     </div>
-    <div class="routes" data-tooltip="Inicio">
+    <div class="routes" data-tooltip="Historial">
       <button class="item history"></button>
       <div class="link-content">
-        <a routerLink="/dashboard">Historial</a>
+        <a routerLink="/history">Historial</a>
       </div>
     </div>
-    <div class="routes" data-tooltip="Inicio">
+    <div class="routes" data-tooltip="Acerca de">
       <button class="item about"></button>
       <div class="link-content">
-        <a routerLink="/dashboard">Acerca de </a>
+        <a routerLink="/dashboard">Acerca de</a>
       </div>
     </div>
-    <div class="routes-container buttom-routes">
-      <div class="routes theme-toggle">
-        <!-- Ícono del tema (solo decorativo) -->
-        <div 
-          class="item theme-icon" 
-          [ngClass]="{ 'dark': isDarkTheme, 'light': !isDarkTheme }"
-          [attr.data-tooltip]="isDarkTheme ? 'Tema oscuro' : 'Tema claro'"
-        ></div>
-    
-        <!-- Switch funcional -->
-        <div 
-          class="theme-switch" 
-          [class.active]="isDarkTheme" 
-          (click)="toggleTheme()"
-        ></div>
-      </div>
+  </div>
 
-      <div class="routes logout" data-tooltip="Cerrar Sesión">
-        <button class="item logout"></button>
-        <div class="link-content">
-          <a routerLink="/logout">Cerrar Sesión</a>
-        </div>
+  <div class="routes-container buttom-routes">
+    <div class="routes">
+      <!-- Icono decorativo solo visible cuando sidebar cerrado -->
+      <div
+        class="item theme-icon"
+        [ngClass]="{ dark: isDarkTheme, light: !isDarkTheme }"
+        *ngIf="!isVisible"
+        [attr.data-tooltip]="isDarkTheme ? 'Tema oscuro' : 'Tema claro'"
+      ></div>
+
+      <!-- Switch solo visible cuando sidebar abierto -->
+      <div
+        class="theme-switch"
+        *ngIf="isVisible"
+        [class.active]="isDarkTheme"
+        (click)="toggleTheme()"
+      ></div>
+
+      <div class="link-content">
+        <a *ngIf="isVisible">Tema</a>
+      </div>
+    </div>
+
+    <div class="routes logout" data-tooltip="Cerrar Sesión">
+      <button class="item logout"></button>
+      <div class="link-content">
+        <a routerLink="/logout">Cerrar Sesión</a>
       </div>
     </div>
   </div>
 </div>
+<router-outlet></router-outlet>

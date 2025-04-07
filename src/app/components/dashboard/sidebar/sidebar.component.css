@@ -80,11 +80,11 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  overflow-y: auto; /* Permite que el contenido se ajuste y no desborde */
 }
 
 /* Estilo base de cada fila */
 .routes {
+  background: #0000000a;
   display: flex;
   align-items: center;
   padding: 10px;
@@ -93,7 +93,6 @@ body {
   transition: background 0.3s;
   position: relative;
 }
-
 
 /* Flex normal cuando sidebar cerrado */
 .sidebar:not(.visible) .routes {
@@ -104,54 +103,63 @@ body {
 
 /* Flex invertido cuando sidebar abierto */
 .sidebar.visible .routes {
-  flex-direction: row-reverse;
+  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
 }
 
-/* Ocultar texto cuando sidebar está cerrado */
-.sidebar:not(.visible) .link-content {
-  display: none;
-}
 
-/* Mostrar texto cuando sidebar está abierto */
-.sidebar.visible .link-content {
-  display: block;
-  margin-right: 10px;
-  color: white;
-}
+
 
 /* Estilo de íconos */
 .item {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
+  width: 25px;
+  height: 25px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   border: none;
   cursor: pointer;
+  background-color: transparent;
 }
 
-/* Ejemplos de íconos */
+/* Íconos según el tema */
 .item.home {
-  background-image: url(https://i.pinimg.com/474x/76/a4/d7/76a4d75e8cf5ee7f4276810526115cf7.jpg);
+  background-image: url(https://cdn-icons-png.flaticon.com/128/4675/4675164.png);
+}
+.item.theme-icon.dark.item.home {
+  background-image: url('/assets/icons/home-dark.svg');
 }
 
 .item.history {
-  background-image: url(https://thumbs.dreamstime.com/b/icono-de-historial-reconstituci%C3%B3n-vector-276463515.jpg);
+  background-image: url(https://cdn-icons-png.flaticon.com/128/18985/18985035.png);
+}
+.item.theme-icon.dark.item.history {
+  background-image: url('/assets/icons/history-dark.svg');
 }
 
 .item.about {
-  background-image: url(https://previews.123rf.com/images/vectorhome/vectorhome2001/vectorhome200100068/152318980-por-qu%C3%A9-nosotros-icono.jpg);
+  background-image: url(https://cdn-icons-png.flaticon.com/128/10288/10288726.png);
 }
-
-.item.logout{
-  background-image: url(https://static.vecteezy.com/system/resources/previews/019/078/821/non_2x/logout-simple-flat-icon-illustration-vector.jpg);
+.item.theme-icon.dark.item.about {
+  background-image: url('/assets/icons/about-dark.svg');
 }
 
 .item.logout {
-  background-image: url(https://static.vecteezy.com/system/resources/previews/019/078/821/non_2x/logout-simple-flat-icon-illustration-vector.jpg);
+  background-image: url(https://cdn-icons-png.flaticon.com/128/54/54874.png);
+}
+.item.theme-icon.dark.item.logout {
+  background-image: url('/assets/icons/logout-dark.svg');
+}
+
+
+/* Ajuste cuando el sidebar está abierto: íconos a la izquierda, texto a la derecha */
+.sidebar.visible .routes .item {
+  margin-right: 10px;
+}
+
+.sidebar.visible .routes .link-content {
+  margin-left: 10px; /* Ajusta el texto a la derecha del ícono */
 }
 
 @keyframes shine {
@@ -186,6 +194,7 @@ a {
   white-space: nowrap;
 }
 
+
 /* Efecto de animación de apertura/cierre del sidebar */
 :host([isVisible="true"]) {
   transform: translateX(0);
@@ -197,7 +206,6 @@ a {
 
 .sidebar:not(.visible) .link-content {
   display: none;
-
 }
 
 /* Botón de cierre de sesión y tema */
@@ -214,13 +222,11 @@ a {
 
 /* Ícono de tema (siempre visible, sin interacción) */
 .item.theme-icon {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  margin-right: 10px;
-  pointer-events: none; /* Desactiva clics */
 }
 
 .item.theme-icon.light {
@@ -229,20 +235,6 @@ a {
 
 .item.theme-icon.dark {
   background-image: url("https://img.icons8.com/ios/50/ffffff/moon-symbol.png");
-}
-
-/* Tooltip opcional al pasar sobre el ícono */
-.item.theme-icon[data-tooltip]:hover::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  left: 100%;
-  margin-left: 10px;
-  padding: 5px;
-  background-color: #333;
-  color: white;
-  font-size: 12px;
-  border-radius: 3px;
-  white-space: nowrap;
 }
 
 /* Switch (solo visible con sidebar abierto) */
@@ -277,12 +269,13 @@ a {
   transform: translateX(18px);
 }
 
-/* Ocultar el switch si sidebar está cerrado */
-.sidebar:not(.visible) .theme-switch {
-  display: none;
+/* Mostrar siempre el icono de tema, incluso con sidebar cerrado */
+.sidebar .item.theme-icon {
+  display: block;
 }
 
-/* Ocultar el texto también */
-.sidebar:not(.visible) .link-content {
-  display: none;
+.routes .link-content a {
+  pointer-events: auto; 
+  z-index: 102; 
 }
+

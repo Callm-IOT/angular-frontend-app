@@ -1,17 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
-/* Tema claro por defecto */
-body {
-  background-color: white;
-  color: black;
-}
-
 /* Tema oscuro */
 body.dark-theme {
   background-color: #121212;
-  color: white;
+  color: #fff;
 }
 
-/* Cambios para otros elementos al usar el tema oscuro */
+/* sidebar */
 body.dark-theme .sidebar {
   background-color: #333;
   color: #f3f3f3;
@@ -27,4 +20,40 @@ body.dark-theme .link-content a {
 
 body.dark-theme p {
   color: white;
+}
+
+body.dark-theme .link-content span {
+  color: white;
+}
+
+body.dark-theme .toggle-text {
+  color: white;
+}
+
+body.dark-theme .close-sidebar {
+  color: white;
+}
+
+/*navbar*/
+body.dark-theme nav {
+  background-color: #222020;
+  color: #f3f3f3;
+}
+
+/*main-content*/
+body.dark-theme .body {
+  background-color: #333;
+  color: #f3f3f3;
+}
+
+/*modal-perfil*/
+body.dark-theme .modal-content {
+  background-color: #333;
+  color: #f3f3f3;
+}
+
+
+body.dark-theme .modal-content .editable {
+  background-color: #adacac;
+  color: #f3f3f3;
 }

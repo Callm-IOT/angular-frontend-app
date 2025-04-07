@@ -1,6 +1,7 @@
 import { Component,Input,Output,EventEmitter } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ThemeService } from '../../../services/theme/theme.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,6 +13,7 @@ import { CommonModule } from '@angular/common';
 export class SidebarComponent {
   @Input() isVisible: boolean = false;
   @Output() toggleOverlay = new EventEmitter<boolean>();
+  constructor(private themeService: ThemeService) {}
   isDarkTheme = false;
 
   toggleSidebar() {
