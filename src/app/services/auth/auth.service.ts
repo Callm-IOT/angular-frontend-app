@@ -9,7 +9,7 @@ import { User } from '../../models/user';
 export class AuthService {
   private username: string = '';
   //API URL for login
-  private apiUrl = 'http://tu-api.com/auth/login';
+  private apiUrl = 'http://localhost:9222/api/v1/auth/singin';
   constructor(private http: HttpClient) {}
 
   setUsername(username: string) {
@@ -21,12 +21,12 @@ export class AuthService {
   }
 
   //login method to authenticate the user
-  login(email: string, password: string): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>(this.apiUrl, { email, password });
+  login(username: string, password: string): Observable<{ token: string }> {
+    return this.http.post<{ token: string,refreshToken:string,user:object }>('http://localhost:9222/api/v1/auth/singin', { username, password });
   }
   //register method to register the user
   register(email: string, password: string,name:string,lastname:string,cellphone:string,username:string,dob:string): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>('http://tu-api.com/auth/register', { email, password,name,lastname,cellphone,username,dob });
+    return this.http.post<{ token: string }>('http://localhost:9222/api/v1/users/create', { email, password,name,lastname,cellphone,username,dob });
   }
   //get a user
   getUser(id: string): Observable<User> {

@@ -9,7 +9,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 4vw; /* Sidebar cerrado */
+  width: 4.6vw; /* Sidebar cerrado */
   height: 100vh;
   background: #f3f3f3;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.199);
@@ -45,13 +45,14 @@ body {
 }
 
 .close-sidebar{
-  margin-left: auto;
+  margin-left:auto;
   cursor: pointer;
   color: #333;
 }
 
 .icon-closed {
   background-image: url(../../../assets/icon-callm.png);
+  margin-left: auto;
 }
 
 .icon-open {

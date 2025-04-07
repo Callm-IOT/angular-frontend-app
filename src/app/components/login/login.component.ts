@@ -21,6 +21,9 @@ export class LoginComponent {
   constructor(private router: Router, private authService: AuthService) {}
   login() {
     if (this.email && this.password) {
+
+      console.log(this.email, this.password);
+      
       this.authService.login(this.email, this.password).subscribe({
         next: (response) => {
           this.authService.setToken(response.token);
