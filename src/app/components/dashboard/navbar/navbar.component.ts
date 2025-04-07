@@ -1,4 +1,4 @@
-import { Component,EventEmitter, Output } from '@angular/core';
+import { Component,EventEmitter, Output, Input } from '@angular/core';
 import { RouterModule, Router} from '@angular/router';
 import { ProfileComponent } from '../profile/profile.component';
 import { CommonModule } from '@angular/common';
@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class NavbarComponent {
   @Output() toggleSidebar = new EventEmitter<void>();
+  @Input() isSidebarOpen = false;
 
   isModalVisible = false;
 

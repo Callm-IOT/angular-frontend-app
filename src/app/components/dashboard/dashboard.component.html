@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-</head>
+  <body>
+    <app-navbar></app-navbar>
+    <app-sidebar
+      [isVisible]="isSidebarVisible"
+      (toggleOverlay)="handleOverlayToggle($event)"
+    ></app-sidebar>
+    <app-main></app-main>
 
-<body>
-  <app-navbar (toggleSidebar)="handleToggleSidebar()"></app-navbar>
-  <app-sidebar [isVisible]="isSidebarVisible"></app-sidebar>
-  <app-main></app-main>
-  
-  <!-- Overlay opcional -->
-  <div class="overlay" *ngIf="isSidebarVisible" (click)="handleToggleSidebar()"></div>
-</body>
-
+    <!-- Overlay opcional -->
+    <div
+      class="overlay"
+      *ngIf="isOverlayVisible"
+    ></div>
+  </body>
 </html>
