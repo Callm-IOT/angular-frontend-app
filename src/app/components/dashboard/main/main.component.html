@@ -1,4 +1,4 @@
-<div class="body">
+<div class="body" *ngIf="dashboard">
   <div class="top">
     <div class="div1">
       <app-graph1></app-graph1>
@@ -22,3 +22,4 @@
     </div>
   </div>
 </div>
+<app-history-calendar *ngIf="history"></app-history-calendar>

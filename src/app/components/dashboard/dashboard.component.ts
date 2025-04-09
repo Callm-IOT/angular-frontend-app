@@ -13,11 +13,22 @@ import { CommonModule } from '@angular/common';
 export class DashboardComponent {
   isSidebarVisible = false;
   isOverlayVisible = false;
+  dashboard = true;
+  history = false;
+  about = false;
+
   handleOverlayToggle(visible: boolean) {
-    this.isOverlayVisible = visible; 
+    this.isOverlayVisible = visible;
   }
 
   handleSidebarVisibilityChange(isVisible: boolean) {
     this.isSidebarVisible = isVisible;
+  }
+
+  //routes dashboard
+  onRouteChange(route: string) {
+    this.dashboard = route === 'dashboard';
+    this.history = route === 'history';
+    this.about = route === 'about';
   }
 }

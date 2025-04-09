@@ -8,11 +8,10 @@ body.dark-theme {
 body.dark-theme .sidebar {
   background-color: #333;
   color: #f3f3f3;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.082);
 }
 
-body.dark-theme .routes-container .routes {
-  background-color: #444;
-}
+
 
 body.dark-theme .link-content a {
   color: white;
@@ -34,6 +33,28 @@ body.dark-theme .close-sidebar {
   color: white;
 }
 
+body.dark-theme .item.home {
+  background-image: url(https://img.icons8.com/m_rounded/512/FFFFFF/home.png);
+}
+
+body.dark-theme .item.history {
+  background-image: url(https://img.icons8.com/ios7/600/FFFFFF/clock.png);
+}
+
+body.dark-theme .item.about {
+  background-image: url(https://img.icons8.com/m_outlined/512/FFFFFF/info.png);
+}
+
+body.dark-theme .item.logout {
+  background-image: url(https://img.icons8.com/fluent-systems-regular/512w/FFFFFF/exit.png);
+}
+body.dark-theme .icon-closed {
+  background-image: url(../src/app/assets/icons/icon-callm.dark.png);
+}
+
+body.dark-theme .icon-open {
+  background-image: url(../src/app/assets/icons/icon-callm.dark.png);
+}
 /*navbar*/
 body.dark-theme nav {
   background-color: #222020;
@@ -52,8 +73,38 @@ body.dark-theme .modal-content {
   color: #f3f3f3;
 }
 
-
 body.dark-theme .modal-content .editable {
   background-color: #adacac;
   color: #f3f3f3;
+}
+
+/*calendario*/
+body.dark-theme body {
+  background-color: #333;
+  color: #f3f3f3;
+}
+
+body.dark-theme .fc {
+  background-color: #6b6a6a;
+  color: #f3f3f3;
+}
+
+body.dark-theme ::ng-deep .fc-day-today {
+  background-color: #333;
+  color: #f3f3f3;
+}
+
+body.dark-theme .data-container {
+  color: #f3f3f3;
+  background-color: #ffffff11;
+}
+
+body.dark-theme .data-content {
+  color: #f3f3f3;
+  background-color: #ffffff11;
+}
+
+body.dark-theme .table-content {
+  color: #f3f3f3;
+  background-color: #ffffff11;
 }

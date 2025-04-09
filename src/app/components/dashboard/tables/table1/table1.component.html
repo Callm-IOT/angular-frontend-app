@@ -1,22 +1,25 @@
 <div class="container mx-auto p-4">
-    <h2 class="text-lg font-bold mb-4">Datos desde API</h2>
-  
-    <div *ngIf="isLoading" class="text-center">Cargando...</div>
-    <div *ngIf="errorMessage" class="text-red-500">{{ errorMessage }}</div>
-  
-    <table *ngIf="!isLoading && !errorMessage" class="w-full border-collapse border border-gray-300">
-      <thead>
-        <tr class="bg-gray-200">
-          <th class="border border-gray-300 p-2">País</th>
-          <th class="border border-gray-300 p-2">Valor</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of tableData">
-          <td class="border border-gray-300 p-2">{{ item.country }}</td>
-          <td class="border border-gray-300 p-2">{{ item.value }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
+  <h2 *ngIf="isLoading" class="text-lg font-bold mb-4">Por favor espere unos segundos</h2>
+
+  <!-- Cargando -->
+  <div *ngIf="isLoading" class="text-center">Cargando...</div>
+
+  <!-- Error -->
+  <div *ngIf="errorMessage" class="text-red-500">{{ errorMessage }}</div>
+
+  <!-- Tabla de datos (Fechas y Usuarios) -->
+  <table *ngIf="!isLoading && !errorMessage" class="w-full border-collapse border border-gray-300">
+    <thead>
+      <tr class="bg-gray-200">
+        <th class="border border-gray-300 p-2">Fecha</th>
+        <th class="border border-gray-300 p-2">Usuario</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of tableData">
+        <td class="border border-gray-300 p-2">{{ item.date }}</td>
+        <td class="border border-gray-300 p-2">{{ item.user }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

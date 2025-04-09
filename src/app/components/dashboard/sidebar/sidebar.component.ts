@@ -13,9 +13,13 @@ import { ThemeService } from '../../../services/theme/theme.service';
 export class SidebarComponent {
   @Input() isVisible: boolean = false;
   @Output() toggleOverlay = new EventEmitter<boolean>();
+  //theme
   constructor(private themeService: ThemeService) {}
   isDarkTheme = false;
+  //router on dashboard
+  @Output() routeChange = new EventEmitter<string>();
 
+  //sidebar function
   toggleSidebar() {
     this.isVisible = !this.isVisible;
     if (!this.isVisible) {
@@ -25,6 +29,7 @@ export class SidebarComponent {
     }
   }
 
+  //theme function
   toggleTheme() {
     this.isDarkTheme = !this.isDarkTheme;
     if (this.isDarkTheme) {
@@ -32,5 +37,18 @@ export class SidebarComponent {
     } else {
       document.body.classList.remove('dark-theme');
     }
+  }
+
+  //router functions
+  dashboardRoute() {
+    this.routeChange.emit('dashboard');
+  }
+
+  historyRoute() {
+    this.routeChange.emit('history');
+  }
+
+  aboutRoute() {
+    this.routeChange.emit('about');
   }
 }

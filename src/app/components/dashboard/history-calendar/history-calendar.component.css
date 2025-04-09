@@ -1,0 +1,156 @@
+/* Estilo base para el body */
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  font-family: "Segoe UI", sans-serif;
+  box-sizing: border-box;
+  padding-left: 70px;
+}
+
+/* Calendario */
+.calendar-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  box-sizing: border-box;
+  width: 70%;
+  height: 90%;
+  background-color: #ffffff00;
+  border-radius: 10px;
+  padding-top: 10%;
+}
+
+/* Imagen del mes */
+.calendar-image {
+  width: 30%;
+  max-width: 350px;
+}
+
+.month-img-bg {
+  width: 100%;
+  height: 452px;
+  background-repeat: no-repeat;
+  background-color: #00000011;
+  background-size: contain; /* Ajusta la imagen al 50% del tamaño del contenedor */
+  background-position: center;
+  border-radius: 12px 0 0 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  background: url(../../../assets/months/april.png);
+}
+
+/* Calendario visual */
+.calendar-view {
+  width: 70%;
+}
+
+/* FullCalendar estilos */
+::ng-deep .fc {
+  font-size: 14px;
+  background-color: #ffffff;
+  border-radius: 0 10px 10px 0;
+  padding: 10px;
+  height: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+::ng-deep .fc-toolbar-title {
+  font-weight: bold;
+  font-size: 22px;
+  color: #f39c12;
+}
+
+::ng-deep .fc-button {
+  background-color: #f39c12;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 6px;
+  margin: 0 2px;
+}
+
+::ng-deep .fc-daygrid-event {
+  background-color: #4f46e5;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+::ng-deep .fc-day-today {
+  background-color: #ffeaa7;
+  border: 2px solid #f39c12;
+}
+
+/* Ajuste del contenedor del calendario */
+full-calendar {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  margin: 0; /* centrar horizontalmente */
+  display: block;
+}
+
+/* Contenedor lateral de datos */
+.data-container {
+  width: 26%;
+  height: 90%;
+  background: #00000011;
+  border-radius: 10px;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: start;
+}
+
+.data-content {
+  background: #00000011;
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 100%;
+  border-radius: 8px;
+}
+
+.data {
+  align-items: center;
+  text-align: center;
+}
+
+/*Contenedor de la tabla*/
+
+.table-content {
+  background: #00000011;
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 100%;
+  border-radius: 8px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+/*estilo de la tabla*/
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #4f46e5;
+  color: white;
+  position: sticky;
+}
+
+th,
+td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+tbody tr:hover {
+  background-color: #f2f2f2;
+}

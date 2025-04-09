@@ -17,26 +17,25 @@
     <div class="routes" data-tooltip="Inicio">
       <button class="item home"></button>
       <div class="link-content">
-        <a routerLink="/dashboard">Inicio</a>
+        <a (click)="dashboardRoute()">Inicio</a>
       </div>
     </div>
     <div class="routes" data-tooltip="Historial">
       <button class="item history"></button>
       <div class="link-content">
-        <a routerLink="/history">Historial</a>
+        <a (click)="historyRoute()">Historial</a>
       </div>
     </div>
     <div class="routes" data-tooltip="Acerca de">
       <button class="item about"></button>
       <div class="link-content">
-        <a routerLink="/dashboard">Acerca de</a>
+        <a (click)="aboutRoute()">Acerca de</a>
       </div>
     </div>
   </div>
 
-  <div class="routes-container buttom-routes">
+  <div class=" buttom-routes">
     <div class="routes">
-      <!-- Icono decorativo solo visible cuando sidebar cerrado -->
       <div
         class="item theme-icon"
         [ngClass]="{ dark: isDarkTheme, light: !isDarkTheme }"
@@ -56,11 +55,12 @@
         <a *ngIf="isVisible">Tema</a>
       </div>
     </div>
-
-    <div class="routes logout" data-tooltip="Cerrar Sesión">
-      <button class="item logout"></button>
-      <div class="link-content">
-        <a routerLink="/logout">Cerrar Sesión</a>
+    <div class="routes">
+      <div class="routes logout" data-tooltip="Cerrar Sesión">
+        <button class="item logout"></button>
+        <div class="link-content">
+          <a routerLink="/logout">Cerrar Sesión</a>
+        </div>
       </div>
     </div>
   </div>

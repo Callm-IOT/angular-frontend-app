@@ -11,13 +11,15 @@
     <app-sidebar
       [isVisible]="isSidebarVisible"
       (toggleOverlay)="handleOverlayToggle($event)"
+      (routeChange)="onRouteChange($event)"
     ></app-sidebar>
-    <app-main></app-main>
+    <app-main
+      [dashboard]="dashboard"
+      [history]="history"
+      [about]="about"
+    ></app-main>
 
     <!-- Overlay opcional -->
-    <div
-      class="overlay"
-      *ngIf="isOverlayVisible"
-    ></div>
+    <div class="overlay" *ngIf="isOverlayVisible"></div>
   </body>
 </html>

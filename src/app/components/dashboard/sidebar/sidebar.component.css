@@ -11,7 +11,7 @@ body {
   left: 0;
   width: 4.6vw; /* Sidebar cerrado */
   height: 100vh;
-  background: #f3f3f3;
+  background: #d5e2d4;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.199);
   transition: width 0.3s ease;
   z-index: 100;
@@ -38,7 +38,7 @@ body {
 }
 
 .toggle-text {
-  color: #333;
+  color: #252525;
   font-weight: bold;
   font-size: 1.5rem;
   margin-left: 15px;
@@ -51,14 +51,14 @@ body {
 }
 
 .icon-closed {
-  background-image: url(../../../assets/icon-callm.png);
+  background-image: url(../../../assets/icons/icon-callm.png);
   margin-left: auto;
 }
 
 .icon-open {
   display: flex;
   align-items: center; /* Alinea el texto y el icono verticalmente */
-  background-image: url(../../../assets/icon-callm.png);
+  background-image: url(../../../assets/icons/icon-callm.png);
   margin-right: auto;
 }
 
@@ -85,7 +85,6 @@ body {
 
 /* Estilo base de cada fila */
 .routes {
-  background: #0000000a;
   display: flex;
   align-items: center;
   padding: 10px;
@@ -109,9 +108,6 @@ body {
   align-items: center;
 }
 
-
-
-
 /* Estilo de íconos */
 .item {
   width: 25px;
@@ -128,31 +124,18 @@ body {
 .item.home {
   background-image: url(https://cdn-icons-png.flaticon.com/128/4675/4675164.png);
 }
-.item.theme-icon.dark.item.home {
-  background-image: url('/assets/icons/home-dark.svg');
-}
 
 .item.history {
   background-image: url(https://cdn-icons-png.flaticon.com/128/18985/18985035.png);
-}
-.item.theme-icon.dark.item.history {
-  background-image: url('/assets/icons/history-dark.svg');
 }
 
 .item.about {
   background-image: url(https://cdn-icons-png.flaticon.com/128/10288/10288726.png);
 }
-.item.theme-icon.dark.item.about {
-  background-image: url('/assets/icons/about-dark.svg');
-}
 
 .item.logout {
-  background-image: url(https://cdn-icons-png.flaticon.com/128/54/54874.png);
+  background-image: url(https://www.iconpacks.net/icons/2/free-exit-icon-2860-thumb.png);
 }
-.item.theme-icon.dark.item.logout {
-  background-image: url('/assets/icons/logout-dark.svg');
-}
-
 
 /* Ajuste cuando el sidebar está abierto: íconos a la izquierda, texto a la derecha */
 .sidebar.visible .routes .item {
@@ -216,19 +199,10 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 15px 0;
   position: absolute; 
   bottom: 0; 
 }
 
-/* Ícono de tema (siempre visible, sin interacción) */
-.item.theme-icon {
-  width: 25px;
-  height: 25px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-}
 
 .item.theme-icon.light {
   background-image: url("https://img.icons8.com/ios/50/000000/sun--v1.png");
