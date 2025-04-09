@@ -56,11 +56,20 @@ export class RegisterComponent {
           )
           .subscribe({
             next: (response) => {
-              this.router.navigate(['/dashboard']);
+              this.email = '';
+              this.username = '';
+              this.name = '';
+              this.lastname = '';
+              this.dob = '';
+              this.phone = '';
+              this.password = '';
+              this.confirmPassword = '';
+              this.router.navigate(['/login']);
             },
             error: (error) => {
               this.errorMessage = 'Error al registrar usuario';
-              console.error(error);
+              // Aquí imprimes más detalles sobre el error
+              console.error('Detalles del error:', error.error.errors);  // Accedemos a error.error.errors
             },
           });
       }

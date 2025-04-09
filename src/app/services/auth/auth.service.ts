@@ -27,8 +27,8 @@ export class AuthService {
   }
 
   // Método para registrar un usuario
-  register(email: string, password: string, name: string, lastname: string, phone: string, username: string, dob: string) {
-    return this.http.post(`${this.apiUrlUser}/create`, { email, password, name, lastname, phone, username, dob, role:'admin' });
+  register(email: string, password: string, name: string, lastName: string, phone: string, username: string, dob: string) {
+    return this.http.post(`${this.apiUrlUser}/create`, { name, lastName, dob,phone,email, username, password, role:'Admin' });
   }
 
   // Obtener un usuario por su ID

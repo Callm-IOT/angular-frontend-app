@@ -22,13 +22,17 @@
       </div>
       <div>
         <label for="cell">Número Telefonico: </label>
-        <input type="text" [(ngModel)]="cellphone" name="cell" required />
+        <input type="text" [(ngModel)]="phone" name="cell" required />
       </div>
     </div>
     <!---------------------------------------------------------------------->
     <div class="inputs">
       <label for="birth" >Fecha de Nacimiento: </label>
       <input style="width: 99.5%;" type="date" [(ngModel)]="dob" name="birth" required />
+    </div>
+    <div class="inputs">
+      <label for="email" >Email: </label>
+      <input style="width: 99.5%;" type="email" [(ngModel)]="email" name="email" required />
     </div>
     <div class="inputs" style="display: flex; flex-direction: row">
       <div style="display: flex; flex-direction: column">

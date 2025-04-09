@@ -14,18 +14,18 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class LoginComponent {
   
-  email: string = '';
+  username: string = '';
   password: string = '';
   errorMessage: string = '';
   isError:boolean = false;
 
   constructor(private router: Router, private authService: AuthService) {}
   login() {
-    if (this.email && this.password) {
+    if (this.username && this.password) {
 
-      console.log(this.email, this.password);
+      console.log(this.username, this.password);
       
-      this.authService.login(this.email, this.password).subscribe({
+      this.authService.login(this.username, this.password).subscribe({
         next: (response) => {
           this.authService.setToken(response.token);
           this.router.navigate(['/dashboard']);
