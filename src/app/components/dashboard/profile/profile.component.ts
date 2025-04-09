@@ -15,7 +15,7 @@ export class ProfileComponent implements OnInit {
   @Input() isVisible = false;
 
   user: User = {
-    id: '',
+   _id: '',
     username: '',
     name: '',
     lastname: '',
@@ -39,7 +39,7 @@ export class ProfileComponent implements OnInit {
   }
 
   saveChanges() {
-    const userId = this.user.id;
+    const userId = this.user._id;
     if (userId) {
       this.authService.updateUser(userId, this.user).subscribe({
         next: (updatedUser) => {
