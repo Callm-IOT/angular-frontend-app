@@ -11,7 +11,13 @@ body.dark-theme .sidebar {
   box-shadow: 0 4px 10px rgba(255, 255, 255, 0.082);
 }
 
+body.dark-theme .routes-container .routes {
+  background-color: #444;
+}
 
+body.dark-theme .routes-container .bottom-routes {
+  background-color: #444;
+}
 
 body.dark-theme .link-content a {
   color: white;
