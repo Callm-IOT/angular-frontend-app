@@ -21,7 +21,8 @@ export class ProfileComponent implements OnInit {
     lastname: '',
     dob: '',
     email: '',
-    cellphone: '',
+    phone: '',
+    role:''
   };
 
   constructor(private authService: AuthService, private router: Router) {}

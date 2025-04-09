@@ -19,7 +19,7 @@ export class RegisterComponent {
   name: string = '';
   lastname: string = '';
   dob: string = '';
-  cellphone: string = '';
+  phone: string = '';
   password: string = '';
   confirmPassword: string = '';
   errorMessage: string = '';
@@ -36,7 +36,7 @@ export class RegisterComponent {
       this.password ||
       this.confirmPassword ||
       this.dob ||
-      this.cellphone
+      this.phone
     ) {
       if (this.password !== this.confirmPassword) {
         this.isError = true;
@@ -52,11 +52,10 @@ export class RegisterComponent {
             this.lastname,
             this.password,
             this.dob,
-            this.cellphone
+            this.phone
           )
           .subscribe({
             next: (response) => {
-              this.authService.setToken(response.token);
               this.router.navigate(['/dashboard']);
             },
             error: (error) => {

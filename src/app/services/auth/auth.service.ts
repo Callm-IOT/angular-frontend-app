@@ -27,8 +27,8 @@ export class AuthService {
   }
 
   // Método para registrar un usuario
-  register(email: string, password: string, name: string, lastname: string, cellphone: string, username: string, dob: string): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>('http://localhost:9222/api/v1/users/create', { email, password, name, lastname, cellphone, username, dob });
+  register(email: string, password: string, name: string, lastname: string, phone: string, username: string, dob: string) {
+    return this.http.post(`${this.apiUrlUser}/create`, { email, password, name, lastname, phone, username, dob, role:'admin' });
   }
 
   // Obtener un usuario por su ID
