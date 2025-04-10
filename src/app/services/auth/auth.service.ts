@@ -24,10 +24,9 @@ export class AuthService {
   }
 
   // Método para login
-  login(username: string, password: string) {
+  login(username: string, password: string): Observable<{ token: string, refreshToken: string, user: any }> {
     if (!username || !password) {
       console.error('Faltan credenciales');
-      return;
     }
     // Continuar con la solicitud si los datos son válidos
     return this.http.post<{ token: string, refreshToken: string, user: User }>(

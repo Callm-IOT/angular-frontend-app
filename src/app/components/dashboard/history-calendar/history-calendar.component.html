@@ -1,58 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calendario</title>
-  </head>
-  <body>
-    <!-- Contenedor general -->
-    <div class="calendar-container">
-      <!-- Columna de la imagen -->
-      <div class="calendar-image">
-        <div class="month-img-bg">
-          <!-- [style.background]="'url(' + currentMonthImage + ')'" -->
-        </div>
-      </div>
 
-      <!-- Columna del calendario -->
-      <div class="calendar-view">
-        <full-calendar [options]="calendarOptions"></full-calendar>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calendario</title>
+</head>
+
+<body>
+  <!-- Contenedor general -->
+  <div class="calendar-container">
+    <!-- Columna de la imagen -->
+    <div class="calendar-image">
+      <div class="month-img-bg">
+        <!-- [style.background]="'url(' + currentMonthImage + ')'" -->
       </div>
     </div>
 
-    <!-- Datos debajo del calendario -->
-    <div class="data-container">
-      <div class="data-content">
-        <div class="title">
-          <h1>Tasa de Visitas:</h1>
-        </div>
-        <div class="data">
-          <h1>{{ visitRate }}%</h1>
-        </div>
-      </div>
+    <!-- Columna del calendario -->
+    <div class="calendar-view">
+      <full-calendar [options]="calendarOptions"></full-calendar>
+    </div>
+  </div>
 
-      <div class="table-content">
-        <div class="title">
-          <h2>Historial de accesos</h2>
-        </div>
-        <div class="data-table">
-          <table>
-            <thead>
-              <tr>
-                <th>Usuario</th>
-                <th>Fecha</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let row of dataSource">
-                <td>{{ row.usuario }}</td>
-                <td>{{ row.fecha }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+  <!-- Datos debajo del calendario -->
+  <div class="data-container">
+    <div class="data-content">
+      <div class="title">
+        <h1>Tasa de Visitas:</h1>
+      </div>
+      <div class="data">
+        <h1>{{ visitRate }}%</h1>
       </div>
     </div>
-  </body>
+
+    <div class="table-content">
+      <div class="title">
+        <h2>Historial de accesos</h2>
+      </div>
+      <div class="data-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Usuario</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of dataSource">
+              <td>{{ row.user }}</td>
+              <td>{{ row.createdAt | date: 'shortDate' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>
