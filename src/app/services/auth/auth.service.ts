@@ -11,7 +11,7 @@ export class AuthService {
   private username: string = '';
   private apiUrlAuth = 'http://localhost:9222/api/v1/auth';
   private apiUrlUser = 'http://localhost:9222/api/v1/users';
-  private apiUrlNoti = 'http://localhost:9222/api/v1/notifications';
+  private apiUrlNoti = 'http://localhost:9222/api/v1/notifications/';
   
   constructor(private http: HttpClient) {}
 
@@ -24,8 +24,16 @@ export class AuthService {
   }
 
   // Método para login
-  login(username: string, password: string): Observable<{ token: string, refreshToken: string, user: User }> {
-    return this.http.post<{ token: string, refreshToken: string, user: User }>(`${this.apiUrlAuth}/signin`, { username, password });
+  login(username: string, password: string) {
+    if (!username || !password) {
+      console.error('Faltan credenciales');
+      return;
+    }
+    // Continuar con la solicitud si los datos son válidos
+    return this.http.post<{ token: string, refreshToken: string, user: User }>(
+      `${this.apiUrlAuth}/signin`,
+      { username, password }
+    );
   }
 
   // Método para registrar un usuario
@@ -77,8 +85,11 @@ export class AuthService {
   }
 
   getUnreadNotificationsCount() {
-    return this.http.get<any[]>(this.apiUrlNoti).pipe(
-      map((notificaciones) => notificaciones.length)
+    return this.http.get<any[]>(`${this.apiUrlNoti}`).pipe(
+      map((notificaciones) => 
+        notificaciones.filter(notification => !notification.isRead).length
+      )
     );
   }
+  
 }

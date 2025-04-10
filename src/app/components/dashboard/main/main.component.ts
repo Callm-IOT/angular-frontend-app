@@ -47,9 +47,14 @@ export class MainComponent {
     });
 
     this.socketService.listen('acceso3').subscribe(() => {
-      this.authService.getUnreadNotificationsCount().subscribe((count) => {
-        this.notifications = count.toString();
-      });
+      this.authService.getUnreadNotificationsCount().subscribe(
+        (count) => {
+          this.notifications = count.toString(); // Actualiza el contador de notificaciones
+        },
+        (error) => {
+          console.error('Error al obtener las notificaciones', error);
+        }
+      );
     });
     
   }

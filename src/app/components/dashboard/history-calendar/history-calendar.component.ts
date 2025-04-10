@@ -13,10 +13,10 @@ import { DataService } from '../../../services/data/data.service';
   styleUrl: './history-calendar.component.css',
 })
 export class HistoryCalendarComponent implements OnInit {
-  dataSource: any[] = []; // Define un array para almacenar los datos de la API
-  visitRate: number = 0;
-  selectedDate: string = '';
-  currentMonthImage: string = '';
+  dataSource: any[] = []; // Array para almacenar los datos de la API
+  visitRate: number = 0; // Tasa de visitas
+  selectedDate: string = ''; // Fecha seleccionada
+  currentMonthImage: string = ''; // Imagen del mes actual
 
   constructor(private dataService: DataService) {} // Inyecta el servicio de datos
 
@@ -50,11 +50,11 @@ export class HistoryCalendarComponent implements OnInit {
 
     // Obtener usuarios y fechas para el día seleccionado
     this.dataService.getHistoryByDate(date).subscribe((data) => {
-      this.dataSource = data;
+      this.dataSource = data; // Actualiza la fuente de datos para la tabla
     });
   }
 
-  //click en una fecha del calendario
+  // Manejar clic en una fecha del calendario
   handleEventClick(clickInfo: any) {
     const fecha = clickInfo.event.startStr; // Obtener la fecha seleccionada (YYYY-MM-DD)
     this.updateDataForDate(fecha); // Actualizar tasa de visitas y tabla de datos
@@ -83,16 +83,8 @@ export class HistoryCalendarComponent implements OnInit {
     // Asegurarnos de que monthIndexStr sea un número entre 01 y 12
     const monthIndex = parseInt(monthIndexStr, 10); // Restamos 1 para ajustarlo al índice del array
 
-    console.log(
-      'selected on calendar: ' +
-        monthNames[monthIndex] +
-        '\nselected on array: ' +
-        monthIndex
-    );
-
     // Asignar la imagen del mes, asegurándose de que la ruta esté correcta
     this.currentMonthImage = `../../../assets/months/${monthNames[monthIndex]}.png`; // Ruta estática de prueba
-    console.log('currentMonthImage:', this.currentMonthImage);
   }
 
   calendarOptions: CalendarOptions = {

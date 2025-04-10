@@ -26,17 +26,17 @@ export class RegisterComponent {
   errorMessage: string = '';
   isError: boolean = false;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService) { }
 
   register() {
     if (
-      this.email ||
-      this.username ||
-      this.name ||
-      this.lastName ||
-      this.password ||
-      this.confirmPassword ||
-      this.dob ||
+      this.email &&
+      this.username &&
+      this.name &&
+      this.lastName &&
+      this.password &&
+      this.confirmPassword &&
+      this.dob &&
       this.phone
     ) {
       if (this.password !== this.confirmPassword) {
@@ -48,15 +48,16 @@ export class RegisterComponent {
         this.authService
           .register(
             this.email,
-            this.username,
+            this.password, // Primero el password
             this.name,
             this.lastName,
-            this.password,
-            this.dob,
-            this.phone
+            this.phone,
+            this.username,
+            this.dob
           )
           .subscribe({
             next: (response) => {
+              // Limpiar los campos después del registro
               this.email = '';
               this.username = '';
               this.name = '';
@@ -66,15 +67,22 @@ export class RegisterComponent {
               this.password = '';
               this.confirmPassword = '';
               console.log(response);
-              
+
+              // Redirigir al login
               this.router.navigate(['/login']);
             },
             error: (error) => {
-              this.errorMessage = 'Error al registrar usuario';
-              // Aquí imprimes más detalles sobre el error
+              this.isError = true;
+              if (error.error && error.error.errors) {
+                this.errorMessage = error.error.errors.join(', '); // Mostrar todos los errores de forma concatenada
+              } else {
+                this.errorMessage = 'Error desconocido al registrar usuario';
+              }
               console.error('Detalles del error:', error.error.errors);
-            },
+            }
+            ,
           });
+
       }
     } else {
       this.isError = true;

@@ -9,7 +9,7 @@ export class SocketService {
   private socket: Socket;
   
   constructor() {
-    this.socket = io('http://localhost:3000'); // Cambia por tu backend
+    this.socket = io('http://localhost:4200'); // Cambia por tu backend
   }
 
   listen(eventName: string): Observable<any> {
