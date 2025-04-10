@@ -13,6 +13,7 @@ import { ThemeService } from '../../../services/theme/theme.service';
 export class SidebarComponent {
   @Input() isVisible: boolean = false;
   @Output() toggleOverlay = new EventEmitter<boolean>();
+  @Output() logoutEvent = new EventEmitter<void>();
   //theme
   constructor(private themeService: ThemeService) {}
   isDarkTheme = false;
@@ -50,5 +51,9 @@ export class SidebarComponent {
 
   aboutRoute() {
     this.routeChange.emit('about');
+  }
+
+  logout() {
+    this.logoutEvent.emit();
   }
 }

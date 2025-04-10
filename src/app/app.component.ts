@@ -1,5 +1,3 @@
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
 import { RouterModule} from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
@@ -7,7 +5,7 @@ import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [LoginComponent,RouterModule,RegisterComponent],
+  imports: [RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

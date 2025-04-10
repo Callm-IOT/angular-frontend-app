@@ -3,6 +3,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MainComponent } from './main/main.component';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,6 +19,8 @@ export class DashboardComponent {
   history = false;
   about = false;
 
+  constructor(private authService: AuthService, private router: Router) {}
+
   handleOverlayToggle(visible: boolean) {
     this.isOverlayVisible = visible;
   }
@@ -30,5 +34,10 @@ export class DashboardComponent {
     this.dashboard = route === 'dashboard';
     this.history = route === 'history';
     this.about = route === 'about';
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

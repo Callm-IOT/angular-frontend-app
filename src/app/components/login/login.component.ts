@@ -13,9 +13,10 @@ import { HttpClientModule } from '@angular/common/http';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  
+  //
   username: string = '';
   password: string = '';
+  //
   errorMessage: string = '';
   isError:boolean = false;
 
@@ -28,6 +29,7 @@ export class LoginComponent {
       this.authService.login(this.username, this.password).subscribe({
         next: (response) => {
           this.authService.setToken(response.token);
+          this.authService.setUser(response.user);
           this.router.navigate(['/dashboard']);
           console.log(response.token);
           console.log(response);

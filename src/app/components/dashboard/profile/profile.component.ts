@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
    _id: '',
     username: '',
     name: '',
-    lastname: '',
+    lastName: '',
     dob: '',
     email: '',
     phone: '',
@@ -28,14 +28,18 @@ export class ProfileComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    const userId = localStorage.getItem('userId'); // Asegúrate de guardar el ID en localStorage
-    if (userId) {
-      this.authService.getUser(userId).subscribe({
+    const storedUser = this.authService.getUserFromStorage();
+
+    if (storedUser) {
+      this.user = storedUser;
+      this.authService.getUser(storedUser._id).subscribe({
         next: (data) => {
           this.user = data;
         },
-        error: (err) => console.error('Error al cargar el usuario:', err),
+        error: (err) => console.error('Error al cargar el usuario desde la API:', err),
       });
+    } else {
+      console.warn('No se encontró el usuario');
     }
   }
 

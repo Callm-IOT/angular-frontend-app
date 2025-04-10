@@ -4,7 +4,6 @@ import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../../services/auth/auth.service';
-import { is } from '@amcharts/amcharts4/core';
 
 @Component({
   selector: 'app-register',
@@ -14,14 +13,16 @@ import { is } from '@amcharts/amcharts4/core';
   styleUrl: './register.component.css',
 })
 export class RegisterComponent {
+  // Variables para el registro
   email: string = '';
   username: string = '';
   name: string = '';
-  lastname: string = '';
+  lastName: string = '';
   dob: string = '';
   phone: string = '';
   password: string = '';
   confirmPassword: string = '';
+  //
   errorMessage: string = '';
   isError: boolean = false;
 
@@ -32,7 +33,7 @@ export class RegisterComponent {
       this.email ||
       this.username ||
       this.name ||
-      this.lastname ||
+      this.lastName ||
       this.password ||
       this.confirmPassword ||
       this.dob ||
@@ -49,7 +50,7 @@ export class RegisterComponent {
             this.email,
             this.username,
             this.name,
-            this.lastname,
+            this.lastName,
             this.password,
             this.dob,
             this.phone
@@ -59,17 +60,19 @@ export class RegisterComponent {
               this.email = '';
               this.username = '';
               this.name = '';
-              this.lastname = '';
+              this.lastName = '';
               this.dob = '';
               this.phone = '';
               this.password = '';
               this.confirmPassword = '';
+              console.log(response);
+              
               this.router.navigate(['/login']);
             },
             error: (error) => {
               this.errorMessage = 'Error al registrar usuario';
               // Aquí imprimes más detalles sobre el error
-              console.error('Detalles del error:', error.error.errors);  // Accedemos a error.error.errors
+              console.error('Detalles del error:', error.error.errors);
             },
           });
       }
