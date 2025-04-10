@@ -8,46 +8,20 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
-  private username: string = '';
   private apiUrlAuth = 'http://localhost:9222/api/v1/auth';
   private apiUrlUser = 'http://localhost:9222/api/v1/users';
-  private apiUrlNoti = 'http://localhost:9222/api/v1/notifications/';
   
   constructor(private http: HttpClient) {}
 
-  setUsername(username: string) {
-    this.username = username;
-  }
-
-  getUsername(): string {
-    return this.username;
-  }
-
   // Método para login
-  login(username: string, password: string): Observable<{ token: string, refreshToken: string, user: any }> {
+  login(username: string, password: string): Observable<{ token: string, refreshToken: string, user: User }> {
     if (!username || !password) {
       console.error('Faltan credenciales');
     }
-    // Continuar con la solicitud si los datos son válidos
     return this.http.post<{ token: string, refreshToken: string, user: User }>(
       `${this.apiUrlAuth}/signin`,
       { username, password }
     );
-  }
-
-  // Método para registrar un usuario
-  register(email: string, password: string, name: string, lastName: string, phone: string, username: string, dob: string) {
-    return this.http.post(`${this.apiUrlUser}/create`, { name, lastName, dob,phone,email, username, password, role:'Admin' });
-  }
-
-  // Obtener un usuario por su ID
-  getUser(_id: string): Observable<User> {
-    return this.http.get<User>(`${this.apiUrlUser}/${_id}`);
-  }
-
-  // Actualizar la información del usuario
-  updateUser(id: string, user: User): Observable<User> {
-    return this.http.put<User>(`${this.apiUrlUser}/${id}`, user);
   }
 
   // Guardar el token en el localStorage
@@ -71,10 +45,16 @@ export class AuthService {
     return user ? JSON.parse(user) : null;
   }
 
-  // Obtener solo el ID del usuario
-  getUserId(): string | null {
+  // Obtener el rol del usuario (Admin o otro)
+  getRole(): string | null {
     const user = this.getUserFromStorage();
-    return user ? user._id : null;
+    return user ? user.role : null;
+  }
+
+  // Verificar si el usuario es Admin
+  isAdmin(): boolean {
+    const role = this.getRole();
+    return role === 'Admin';
   }
 
   // Cerrar sesión y eliminar los datos del localStorage
@@ -82,13 +62,4 @@ export class AuthService {
     localStorage.removeItem('authToken');
     localStorage.removeItem('user');
   }
-
-  getUnreadNotificationsCount() {
-    return this.http.get<any[]>(`${this.apiUrlNoti}`).pipe(
-      map((notificaciones) => 
-        notificaciones.filter(notification => !notification.isRead).length
-      )
-    );
-  }
-  
 }

@@ -36,7 +36,7 @@
 
     <div class="table-content">
       <div class="title">
-        <h2>Historial de accesos</h2>
+        <h2>Historial de accesos: {{selectedDate}}</h2>
       </div>
       <div class="data-table">
         <table>
@@ -47,9 +47,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let row of dataSource">
-              <td>{{ row.user }}</td>
-              <td>{{ row.createdAt | date: 'shortDate' }}</td>
+            <tr *ngFor="let user of dataSource">
+              <td>{{ user.user }}</td>
+              <td>{{ user.createdAt | date: 'shortDate' }}</td>
             </tr>
           </tbody>
         </table>

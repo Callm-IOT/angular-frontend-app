@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { io, Socket } from 'socket.io-client'; // Importa socket.io-client
+import { AuthService } from '../../services/auth/auth.service'; // Importa el servicio de autenticación
 
 @Injectable({
   providedIn: 'root',
@@ -12,21 +13,38 @@ export class DataService {
   private serverUrl = 'http://localhost:3000'; // URL para WebSocket
   private apiUrl = 'http://localhost:9222/api/v1/all-users/'; // URL de la API
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authService: AuthService) {
     // Conectar a WebSocket
     this.socket = io(this.serverUrl);
   }
 
-  // Obtener usuarios y sus fechas de creación desde la API
+  // Obtener usuarios y sus fechas de creación desde la API con verificación de token y rol Admin
   getDatesAndUsers(): Observable<{ user: string; createdAt: string }[]> {
-    return this.http.get<any[]>(this.apiUrl).pipe(
-      // Filtrar para obtener solo el nombre de usuario y la fecha de creación
-      map((users) => 
-        users.map(user => ({
-          user: user.username,        // Filtrar por el campo de nombre de usuario
-          createdAt: user.createdAt   // Filtrar por la fecha de creación
-        }))
-      )
+    const token = this.authService.getToken();
+    console.log(token);
+    
+    
+    // Verificar si el token existe y si el usuario es Admin
+    if (!token || !this.authService.isAdmin()) {
+      return new Observable(observer => {
+        observer.error('Acceso denegado: Usuario no autorizado');
+      });
+    }
+
+    // Si el token y el rol son válidos, incluimos el token en los encabezados
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    
+    // Hacemos la solicitud GET incluyendo los encabezados con el token
+    return this.http.get<any[]>(this.apiUrl, { headers }).pipe(
+      map((response) => {
+        if (response && Array.isArray(response)) {
+          return response.map(user => ({
+            user: user.username,   // Filtrar por el campo de nombre de usuario
+            createdAt: user.createdAt // Filtrar por la fecha de creación
+          }));
+        }
+        return [];  // Si la respuesta no es un array válido, devolver un array vacío
+      })
     );
   }
 

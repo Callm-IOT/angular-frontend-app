@@ -32,8 +32,7 @@ export class LoginComponent {
           this.authService.setUser(response.user);
           this.router.navigate(['/dashboard']);
           console.log(response.token);
-          console.log(response);
-          
+          console.log(response.user.role);
         },
         error: (error) => {
           this.isError = true;

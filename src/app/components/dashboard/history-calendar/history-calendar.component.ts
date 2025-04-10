@@ -10,7 +10,7 @@ import { DataService } from '../../../services/data/data.service';
   selector: 'app-history-calendar',
   imports: [CommonModule, FullCalendarModule],
   templateUrl: './history-calendar.component.html',
-  styleUrl: './history-calendar.component.css',
+  styleUrls: ['./history-calendar.component.css'],
 })
 export class HistoryCalendarComponent implements OnInit {
   dataSource: any[] = []; // Array para almacenar los datos de la API
@@ -18,10 +18,21 @@ export class HistoryCalendarComponent implements OnInit {
   selectedDate: string = ''; // Fecha seleccionada
   currentMonthImage: string = ''; // Imagen del mes actual
 
-  constructor(private dataService: DataService) {} // Inyecta el servicio de datos
+  constructor(private dataService: DataService) {}
 
   ngOnInit() {
     const today = this.getTodayDate();
+
+    // Obtener los usuarios y sus fechas de creación
+    this.dataService.getDatesAndUsers().subscribe({
+      next: (data) => {
+        this.dataSource = data;  // Asignar los usuarios obtenidos a dataSource
+        this.updateCalendarEvents(); // Actualizar los eventos del calendario
+      },
+      error: (error) => {
+        console.error('Error al obtener usuarios:', error);
+      }
+    });
 
     // Obtener tasa de visitas en tiempo real
     this.dataService.getVisitRate().subscribe((rate) => {
@@ -77,14 +88,23 @@ export class HistoryCalendarComponent implements OnInit {
       'december',
     ];
 
-    // Extraemos el mes del formato 'YYYY-MM-DDTHH:MM:SSZ'
     const monthIndexStr = dateStr.split('T')[0].split('-')[1]; // 'MM' de 'YYYY-MM-DD'
-
-    // Asegurarnos de que monthIndexStr sea un número entre 01 y 12
     const monthIndex = parseInt(monthIndexStr, 10); // Restamos 1 para ajustarlo al índice del array
 
-    // Asignar la imagen del mes, asegurándose de que la ruta esté correcta
     this.currentMonthImage = `../../../assets/months/${monthNames[monthIndex]}.png`; // Ruta estática de prueba
+  }
+
+  // Actualizar los eventos en el calendario
+  updateCalendarEvents(): void {
+    const events = this.dataSource.map((user) => ({
+      title: `${user.user}`, // Nombre de usuario
+      start: user.createdAt,  // Fecha de creación
+      allDay: true,           // Todo el día
+      description: `Usuario: ${user.user}`, // Descripción
+    }));
+
+    // Actualizar el calendario con los eventos
+    this.calendarOptions.events = events;
   }
 
   calendarOptions: CalendarOptions = {
@@ -101,5 +121,6 @@ export class HistoryCalendarComponent implements OnInit {
     datesSet: (arg) => {
       this.updateMonthImage(arg.startStr);
     },
+    events: [], // Inicialmente vacío, se actualizará con los eventos
   };
 }
