@@ -25,9 +25,9 @@ export class MainComponent {
   @Input() history: boolean = false;
   @Input() about: boolean = false;
   //
-  access: number = 0;
-  visits: number = 1;
-  access2: number = 0;
+  access: string = '--';
+  visits: string = '--';
+  notifications: string = '--';
 
   constructor(
     private authService: AuthService,
@@ -46,8 +46,11 @@ export class MainComponent {
       this.visits = data.valor ?? 0;
     });
 
-    this.socketService.listen('acceso3').subscribe((data) => {
-      this.access2 = data.valor ?? 0;
+    this.socketService.listen('acceso3').subscribe(() => {
+      this.authService.getUnreadNotificationsCount().subscribe((count) => {
+        this.notifications = count.toString();
+      });
     });
+    
   }
 }
