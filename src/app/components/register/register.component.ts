@@ -67,6 +67,8 @@ export class RegisterComponent {
               this.password = '';
               this.confirmPassword = '';
               console.log(response);
+              console.log('Usuario registrado correctamente:', response.user);
+              
 
               // Redirigir al login
               this.router.navigate(['/login']);
@@ -76,7 +78,7 @@ export class RegisterComponent {
               if (error.error && error.error.errors) {
                 this.errorMessage = error.error.errors.join(', '); // Mostrar todos los errores de forma concatenada
               } else {
-                this.errorMessage = 'Error desconocido al registrar usuario';
+                this.errorMessage = 'Error al registrar usuario';
               }
               console.error('Detalles del error:', error.error.errors);
             }

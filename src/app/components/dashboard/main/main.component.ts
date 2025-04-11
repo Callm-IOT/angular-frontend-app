@@ -19,7 +19,6 @@ CommonModule;
   styleUrl: './main.component.css',
 })
 export class MainComponent {
-  username: string;
   //routes
   @Input() dashboard: boolean = false;
   @Input() history: boolean = false;
@@ -32,9 +31,7 @@ export class MainComponent {
   constructor(
     private authService: AuthService,
     private socketService: SocketService
-  ) {
-    this.username = this.authService.getUsername();
-  }
+  ) {}
 
   //sockets
   ngOnInit(): void {
@@ -47,7 +44,7 @@ export class MainComponent {
     });
 
     this.socketService.listen('acceso3').subscribe(() => {
-      this.authService.getUnreadNotificationsCount().subscribe(
+      this.authService.getUnreadNotifications().subscribe(
         (count) => {
           this.notifications = count.toString(); // Actualiza el contador de notificaciones
         },
@@ -56,6 +53,5 @@ export class MainComponent {
         }
       );
     });
-    
   }
 }

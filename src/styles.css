@@ -81,7 +81,14 @@ body.dark-theme .modal-content {
 
 body.dark-theme .modal-content .editable {
   background-color: #adacac;
+  color: #e0e0d4;
+}
+
+
+body.dark-theme .modal-content .btn {
+  background-color: #adacac;
   color: #f3f3f3;
+  background: #3d3d3d;
 }
 
 /*calendario*/

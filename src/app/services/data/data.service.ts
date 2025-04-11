@@ -11,7 +11,7 @@ import { AuthService } from '../../services/auth/auth.service'; // Importa el se
 export class DataService {
   private socket: Socket;
   private serverUrl = 'http://localhost:3000'; // URL para WebSocket
-  private apiUrl = 'http://localhost:9222/api/v1/all-users/'; // URL de la API
+  private apiUrl = 'http://localhost:9222/api/v1/users/all-users/'; // URL de la API
 
   constructor(private http: HttpClient, private authService: AuthService) {
     // Conectar a WebSocket

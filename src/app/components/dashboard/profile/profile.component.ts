@@ -15,15 +15,16 @@ export class ProfileComponent implements OnInit {
   @Input() isVisible = false;
 
   user: User = {
-   _id: '',
+    _id: '',
     username: '',
     name: '',
     lastName: '',
     dob: '',
     email: '',
     phone: '',
-    role:''
+    role: '',
   };
+  formattedDob: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -32,11 +33,12 @@ export class ProfileComponent implements OnInit {
 
     if (storedUser) {
       this.user = storedUser;
-      this.authService.getUser(storedUser._id).subscribe({
+      this.authService.getUserById(storedUser._id).subscribe({
         next: (data) => {
           this.user = data;
         },
-        error: (err) => console.error('Error al cargar el usuario desde la API:', err),
+        error: (err) =>
+          console.error('Error al cargar el usuario desde la API:', err),
       });
     } else {
       console.warn('No se encontró el usuario');

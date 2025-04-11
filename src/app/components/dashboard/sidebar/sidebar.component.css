@@ -52,14 +52,12 @@ body {
 
 .icon-closed {
   background-image: url(../../../assets/icons/icon-callm.png);
-  margin-left: auto;
 }
 
 .icon-open {
   display: flex;
   align-items: center; /* Alinea el texto y el icono verticalmente */
   background-image: url(../../../assets/icons/icon-callm.png);
-  margin-right: auto;
 }
 
 .sidebar-toggle-btn {
@@ -71,7 +69,6 @@ body {
   cursor: pointer;
   background-color: transparent;
   padding: 20px;
-  margin: 0px 15px;
 }
 
 /* Contenedor de rutas */
