@@ -1,8 +1,8 @@
 import { DataService } from '../../../../services/data/data.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../../../services/auth/auth.service';
 import { CommonModule } from '@angular/common';
-import { interval } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 @Component({
@@ -11,31 +11,37 @@ import { switchMap } from 'rxjs/operators';
   templateUrl: './table1.component.html',
   styleUrls: ['./table1.component.css']
 })
-export class Table1Component implements OnInit {
+export class Table1Component implements OnInit, OnDestroy {
 
-  public tableData: { date: string, access: boolean }[] = []; // Aquí almacenamos las fechas y acceso
-  public filteredData: { date: string, access: boolean | string }[] = []; // Para almacenar los datos filtrados
+  public tableData: { date: string, access: boolean }[] = [];
+  public filteredData: { date: string, access: boolean | string }[] = [];
   public isLoading = true;
   public errorMessage = '';
-  public selectedDate: string = ''; // Variable para almacenar la fecha seleccionada
+  public selectedDate: string = '';
+  public noRecordsMessage: string = '';
+
+  private intervalSubscription: Subscription | null = null; // Inicializado en null
+  private socket: WebSocket | null = null; // Inicializado en null
+
+  public closedRecords: { date: string, user: string, isOpen: boolean }[] = [];
 
   constructor(private dataService: DataService, private authService: AuthService) { }
 
-  public closedRecords: { date: string, user: string, isOpen: boolean }[] = []; // Para almacenar registros cerrados
-
   ngOnInit(): void {
-    // Inicializar con la fecha de hoy
     this.selectedDate = this.getTodayDate();
     this.loadDataForSelectedDate(this.selectedDate);
 
-    interval(100)
-      .pipe(
-        switchMap(() => this.authService.getClosedRecords()) // Obtener los registros cerrados
-      )
+    // WebSocket directo
+    this.initializeWebSocketConnection();
+
+    // Lógica de intervalo
+    this.intervalSubscription = interval(50000)
+      .pipe(switchMap(() => this.authService.getClosedRecords()))
       .subscribe({
         next: (data) => {
-          this.closedRecords = data; // Actualizar los registros en la tabla
+          this.closedRecords = data;
           this.isLoading = false;
+          this.checkNoRecords();
         },
         error: (error) => {
           this.errorMessage = 'Error al cargar los registros cerrados';
@@ -45,28 +51,38 @@ export class Table1Component implements OnInit {
       });
   }
 
-  // Función para obtener la fecha de hoy en formato YYYY-MM-DD
+  ngOnDestroy(): void {
+    // Limpiar la suscripción al intervalo al destruir el componente
+    if (this.intervalSubscription) {
+      this.intervalSubscription.unsubscribe();
+    }
+
+    // Cerrar el WebSocket si está abierto
+    if (this.socket) {
+      this.socket.close();
+    }
+  }
+
   getTodayDate(): string {
     const today = new Date();
     return today.toISOString().split('T')[0];
   }
 
-  // Función para cargar los datos de fecha y acceso para la fecha seleccionada
   loadDataForSelectedDate(date: string): void {
     this.isLoading = true;
     this.authService.getClosedRecords().subscribe({
       next: (data) => {
         this.closedRecords = data;
         this.tableData = data.map(record => ({
-          date: new Date(record.createdAt).toLocaleString(), // o solo .toISOString().split('T')[0] si prefieres solo la fecha
+          date: new Date(record.createdAt).toLocaleString(),
           access: record.isOpen
         }));
         this.isLoading = false;
+        this.checkNoRecords();
       }
     });
   }
 
-  // Función para filtrar los registros y reemplazar acceso false con "No permitido"
   filterAccessRecords(data: any[]): void {
     this.filteredData = data.map(record => {
       return {
@@ -76,9 +92,46 @@ export class Table1Component implements OnInit {
     });
   }
 
-  // Este método se puede invocar cuando la fecha cambia (por ejemplo, desde un calendario)
   onDateChange(newDate: string): void {
     this.selectedDate = newDate;
     this.loadDataForSelectedDate(newDate);
+  }
+
+  initializeWebSocketConnection(): void {
+    this.socket = new WebSocket('wss://tusocket.com/path'); // Sustituye con tu URL real
+
+    this.socket.onopen = () => {
+      console.log('Conexión WebSocket abierta');
+    };
+
+    this.socket.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      if (data && data.createdAt && data.isOpen !== undefined) {
+        const newRecord = {
+          date: new Date(data.createdAt).toLocaleString(),
+          access: data.isOpen
+        };
+        this.tableData.unshift(newRecord);
+        this.filterAccessRecords(this.tableData);
+        console.log('Nuevo registro recibido por WebSocket:', newRecord);
+        this.checkNoRecords();
+      }
+    };
+
+    this.socket.onerror = (error) => {
+      console.error('Error en WebSocket:', error);
+    };
+
+    this.socket.onclose = () => {
+      console.log('WebSocket cerrado');
+    };
+  }
+
+  checkNoRecords(): void {
+    if (this.tableData.length === 0) {
+      this.noRecordsMessage = 'No hay registros disponibles';
+    } else {
+      this.noRecordsMessage = '';
+    }
   }
 }

@@ -36,29 +36,35 @@ export class MainComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Sockets que sí usas
+    // Socket para accesos
     this.socketService.listen('acceso1').subscribe((data) => {
       this.access = data.valor ?? '0';
     });
 
-    interval(100) // cada 10 segundos
-    .pipe(switchMap(() => this.authService.getRecordStatus()))
-    .subscribe(
-      (statusList) => {
-        const countOpen = Array.isArray(statusList)
-          ? statusList.filter(s => s === true).length
-          : 0;
-        this.access = countOpen.toString();
-      },
-      (error) => {
-        console.error('Error al obtener estado de records', error);
-        this.access = '0';
-      }
-    );
-  
+    // Nuevo WebSocket para notificaciones en tiempo real
+    this.socketService.listen('nuevaNotificacion').subscribe((data) => {
+      // Puedes personalizar esta lógica según el contenido del evento
+      this.cargarNotificaciones(); // Refrescar la cuenta de notificaciones
+    });
+
+    // Refrescar estado de records cada 10 segundos
+    interval(10000) // cada 10 segundos
+      .pipe(switchMap(() => this.authService.getRecordStatus()))
+      .subscribe(
+        (statusList) => {
+          const countOpen = Array.isArray(statusList)
+            ? statusList.filter(s => s === true).length
+            : 0;
+          this.access = countOpen.toString();
+        },
+        (error) => {
+          console.error('Error al obtener estado de records', error);
+          this.access = '0';
+        }
+      );
 
     // Refrescar notificaciones cada 10 segundos
-    interval(10)
+    interval(10000)
       .pipe(switchMap(() => this.authService.getUnreadNotifications()))
       .subscribe(
         (notifications) => {
@@ -71,10 +77,9 @@ export class MainComponent implements OnInit {
         }
       );
 
-    // Carga inicial de notificaciones
+    // Carga inicial
     this.cargarNotificaciones();
     this.cargarEstadoRecords();
-
   }
 
   cargarNotificaciones(): void {
@@ -104,5 +109,4 @@ export class MainComponent implements OnInit {
       }
     );
   }
-  
 }
