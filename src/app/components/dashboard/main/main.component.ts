@@ -41,7 +41,7 @@ export class MainComponent implements OnInit {
       this.access = data.valor ?? '0';
     });
 
-    interval(10) // cada 10 segundos
+    interval(100) // cada 10 segundos
     .pipe(switchMap(() => this.authService.getRecordStatus()))
     .subscribe(
       (statusList) => {

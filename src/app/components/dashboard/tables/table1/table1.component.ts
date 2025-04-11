@@ -28,7 +28,7 @@ export class Table1Component implements OnInit {
     this.selectedDate = this.getTodayDate();
     this.loadDataForSelectedDate(this.selectedDate);
 
-    interval(10)
+    interval(100)
       .pipe(
         switchMap(() => this.authService.getClosedRecords()) // Obtener los registros cerrados
       )
