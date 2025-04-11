@@ -18,7 +18,7 @@
     </div>
     <div class="div5">
       <h2>Notificaciones</h2><br>
-      <h1>{{notifications}}</h1>
+      <h1 *ngIf="notifications !== '0'">{{ notifications }}</h1>
     </div>
   </div>
 </div>

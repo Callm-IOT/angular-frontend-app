@@ -1,6 +1,9 @@
+import { DataService } from '../../../../services/data/data.service';
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../../../services/data/data.service'; 
+import { AuthService } from '../../../../services/auth/auth.service';
 import { CommonModule } from '@angular/common';
+import { interval } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-table1',
@@ -10,17 +13,36 @@ import { CommonModule } from '@angular/common';
 })
 export class Table1Component implements OnInit {
 
-  public tableData: { date: string, user: string }[] = []; // Aquí almacenamos los usuarios y fechas
+  public tableData: { date: string, access: boolean }[] = []; // Aquí almacenamos las fechas y acceso
+  public filteredData: { date: string, access: boolean | string }[] = []; // Para almacenar los datos filtrados
   public isLoading = true;
   public errorMessage = '';
   public selectedDate: string = ''; // Variable para almacenar la fecha seleccionada
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService, private authService: AuthService) { }
+
+  public closedRecords: { date: string, user: string, isOpen: boolean }[] = []; // Para almacenar registros cerrados
 
   ngOnInit(): void {
-    // Puedes inicializar con la fecha de hoy
+    // Inicializar con la fecha de hoy
     this.selectedDate = this.getTodayDate();
     this.loadDataForSelectedDate(this.selectedDate);
+
+    interval(10)
+      .pipe(
+        switchMap(() => this.authService.getClosedRecords()) // Obtener los registros cerrados
+      )
+      .subscribe({
+        next: (data) => {
+          this.closedRecords = data; // Actualizar los registros en la tabla
+          this.isLoading = false;
+        },
+        error: (error) => {
+          this.errorMessage = 'Error al cargar los registros cerrados';
+          this.isLoading = false;
+          console.error(error);
+        }
+      });
   }
 
   // Función para obtener la fecha de hoy en formato YYYY-MM-DD
@@ -29,19 +51,28 @@ export class Table1Component implements OnInit {
     return today.toISOString().split('T')[0];
   }
 
-  // Función para cargar los datos de usuario y fecha para la fecha seleccionada
+  // Función para cargar los datos de fecha y acceso para la fecha seleccionada
   loadDataForSelectedDate(date: string): void {
     this.isLoading = true;
-    this.dataService.getHistoryByDate(date).subscribe({
+    this.authService.getClosedRecords().subscribe({
       next: (data) => {
-        this.tableData = data;
+        this.closedRecords = data;
+        this.tableData = data.map(record => ({
+          date: new Date(record.createdAt).toLocaleString(), // o solo .toISOString().split('T')[0] si prefieres solo la fecha
+          access: record.isOpen
+        }));
         this.isLoading = false;
-      },
-      error: (error) => {
-        this.errorMessage = 'Error al cargar los datos';
-        this.isLoading = false;
-        console.error(error);
       }
+    });
+  }
+
+  // Función para filtrar los registros y reemplazar acceso false con "No permitido"
+  filterAccessRecords(data: any[]): void {
+    this.filteredData = data.map(record => {
+      return {
+        date: record.date,
+        access: record.access === false ? 'No permitido' : 'Permitido'
+      };
     });
   }
 

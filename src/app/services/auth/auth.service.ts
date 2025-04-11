@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { User } from '../../models/user';
 import { map } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
+import { Socket } from 'ngx-socket-io';
 
 @Injectable({
   providedIn: 'root',
@@ -12,8 +13,8 @@ export class AuthService {
   private apiUrlAuth = 'http://localhost:9222/api/v1/auth';
   private apiUrlUser = 'http://localhost:9222/api/v1/users';
   private apiUrlNotification = 'http://localhost:9222/api/v1/notifications';
-  
-  constructor(private http: HttpClient) {}
+
+  constructor(private http: HttpClient) { }
   //metodo para registro
   register(
     email: string,
@@ -31,7 +32,7 @@ export class AuthService {
     }
     return this.http.post<{ token: string, refreshToken: string, user: User }>(
       `${this.apiUrlUser}/create`,
-      { email, password, name, lastName, phone, username, dob , role }
+      { email, password, name, lastName, phone, username, dob, role }
     );
   }
 
@@ -68,14 +69,14 @@ export class AuthService {
   }
 
   // Obtener un usuario desde la API por su ID
-getUserById(userId: string): Observable<User> {
-  return this.http.get<User>(`${this.apiUrlUser}/${userId}`);
-}
+  getUserById(userId: string): Observable<User> {
+    return this.http.get<User>(`${this.apiUrlUser}/${userId}`);
+  }
 
-// Actualizar un usuario en la base de datos
-updateUser(userId: string, updatedUser: User): Observable<User> {
-  return this.http.put<User>(`${this.apiUrlUser}/${userId}`, updatedUser);
-}
+  // Actualizar un usuario en la base de datos
+  updateUser(userId: string, updatedUser: User): Observable<User> {
+    return this.http.put<User>(`${this.apiUrlUser}/${userId}`, updatedUser);
+  }
 
 
   // Obtener el rol del usuario (Admin o otro)
@@ -93,23 +94,54 @@ updateUser(userId: string, updatedUser: User): Observable<User> {
   // obtener las notificaciones del usuario
   getUnreadNotifications(): Observable<any[]> {
     const token = this.getToken();
-  
+
     if (!token) {
       console.error('Token no encontrado');
-      return new Observable((observer) => {
-        observer.next([]);
-        observer.complete();
-      });
+      return of([]);  // Retorna un observable vacío si no hay token
     }
-  
+
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-  
+
     return this.http.get<any[]>(`${this.apiUrlNotification}/`, { headers });
   }
+
+  //Obtener informacion de las puertas
+
+  //abiertas
+  getRecordStatus(): Observable<boolean[]> {
+    const token = this.getToken();
+
+    if (!token) {
+      console.error('Token no encontrado');
+      return of([]);
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.get<any[]>(`http://localhost:9222/api/v1/records`, { headers }).pipe(
+      map((records) => {
+        // Filtramos los que tienen isOpen === true
+        return records
+          .filter((record) => record.isOpen === true)
+          .map(() => true); // solo devolvemos un array de `true` por cada isOpen === true
+      })
+    );
+  }
+
+  getClosedRecords(): Observable<any[]> {
+    return this.http.get<any[]>(`http://localhost:9222/api/v1/records`).pipe(
+      map((records) => {
+        console.log('Todos los records:', records); // Aquí ves el payload completo
+        return records.filter((record) => record.isOpen === false);
+      })
+    );
+  }
   
-  
+
 
   // Cerrar sesión y eliminar los datos del localStorage
   logout(): void {

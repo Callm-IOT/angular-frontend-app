@@ -32,6 +32,8 @@ export class LoginComponent {
           this.authService.setUser(response.user);
           this.router.navigate(['/dashboard']);
           console.log(response.token);
+          console.log(response.user._id);
+          
           console.log(response.user.role);
         },
         error: (error) => {
